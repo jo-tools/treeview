@@ -596,8 +596,8 @@ Inherits ListBox
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Function Draw_CellBackground(g As Graphics, row As Integer) As Boolean
+	#tag Method, Flags = &h21
+		Private Function Draw_CellBackground(g As Graphics, row As Integer) As Boolean
 		  '============================================================
 		  '
 		  ' Draw Row Background
@@ -609,11 +609,17 @@ Inherits ListBox
 		  
 		  ' Selection
 		  If (row = Me.ListIndex) Then
-		    'Let Xojo draw the default Selection Background
-		    Return False
-		    'g.foreColor = HighlightColor
-		    'g.FillRect(0, 0, g.width, g.height)
-		    'Return True
+		    #If TargetMacOS Then
+		      'Let Xojo draw the default Selection Background
+		      Return False
+		    #Else
+		      'At least on Windows, Xojo doesn't draw the whole row with a background selection
+		      'so we do that here ourselves. Should be improved with Declares to get the correct
+		      'colors for the state 'window is not active'...
+		      g.foreColor = If(Self.Active, HighlightColor, If(IsDarkMode, &c242424, &cC9C5BB))
+		      g.FillRect(0, 0, g.width, g.height)
+		      Return True
+		    #EndIf
 		  End If
 		  
 		  If (Me.Enabled = False) Then
@@ -637,8 +643,8 @@ Inherits ListBox
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Function Draw_CellText(g As Graphics, row As Integer, column As Integer, x As Integer, y As Integer) As Boolean
+	#tag Method, Flags = &h21
+		Private Function Draw_CellText(g As Graphics, row As Integer, column As Integer, x As Integer, y As Integer) As Boolean
 		  '============================================================
 		  '
 		  ' Draw Cell Text
