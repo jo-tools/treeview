@@ -18,7 +18,7 @@ Begin Window Window1
    MaxWidth        =   32000
    MenuBar         =   57315327
    MenuBarVisible  =   True
-   MinHeight       =   300
+   MinHeight       =   400
    MinimizeButton  =   True
    MinWidth        =   450
    Placement       =   0
@@ -78,7 +78,7 @@ Begin Window Window1
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
-   Begin Label labClickLast
+   Begin Label labSelectionCurrentTitle
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -93,7 +93,7 @@ Begin Window Window1
       LockBottom      =   True
       LockedInPosition=   True
       LockLeft        =   True
-      LockRight       =   True
+      LockRight       =   False
       LockTop         =   False
       Multiline       =   False
       Scope           =   2
@@ -101,7 +101,7 @@ Begin Window Window1
       TabIndex        =   8
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "Last Click on Tree:"
+      Text            =   "Current Selection:"
       TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
@@ -113,7 +113,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   140
    End
-   Begin Label labClick
+   Begin Label labSelectionCurrent
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -151,7 +151,7 @@ Begin Window Window1
    Begin RadioButton radShowHintColumn
       AutoDeactivate  =   True
       Bold            =   False
-      Caption         =   "Show Hint Column"
+      Caption         =   " Show Hint Column "
       Enabled         =   True
       Height          =   20
       HelpTag         =   ""
@@ -193,7 +193,7 @@ Begin Window Window1
       LockBottom      =   True
       LockedInPosition=   True
       LockLeft        =   True
-      LockRight       =   True
+      LockRight       =   False
       LockTop         =   False
       Multiline       =   True
       Scope           =   2
@@ -334,7 +334,7 @@ Begin Window Window1
       Italic          =   False
       Left            =   100
       LockBottom      =   False
-      LockedInPosition=   True
+      LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -354,7 +354,7 @@ Begin Window Window1
       Transparent     =   True
       Underline       =   True
       Visible         =   True
-      Width           =   160
+      Width           =   120
    End
    Begin Label labAppVersion
       AutoDeactivate  =   True
@@ -369,7 +369,7 @@ Begin Window Window1
       Italic          =   False
       Left            =   100
       LockBottom      =   False
-      LockedInPosition=   True
+      LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
@@ -389,7 +389,7 @@ Begin Window Window1
       Transparent     =   True
       Underline       =   False
       Visible         =   True
-      Width           =   160
+      Width           =   120
    End
    Begin Label labContact
       AutoDeactivate  =   True
@@ -489,9 +489,9 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Open()
-		  self.Title = constAppName
+		  Self.Title = constAppName
 		  
-		  self.Tree_Setup()
+		  Self.Tree_Setup
 		End Sub
 	#tag EndEvent
 
@@ -499,20 +499,21 @@ End
 	#tag Method, Flags = &h21
 		Private Function ColorValue(piIconColor As IconColor) As Color
 		  Dim oColor As Color = &c000000
-		  select case piIconColor
-		  case IconColor.Blue
-		    oColor = &c1F417B00
-		  case IconColor.Green
-		    oColor = &c73A86000
-		  case IconColor.Orange
-		    oColor = &cCC752F00
-		  case IconColor.Red
-		    oColor = &cBB372400
-		  case IconColor.Yellow
-		    oColor = &cD4CF5100
-		  end select
 		  
-		  return oColor
+		  Select Case piIconColor
+		  Case IconColor.Blue
+		    oColor = &c1F417B00
+		  Case IconColor.Green
+		    oColor = &c73A86000
+		  Case IconColor.Orange
+		    oColor = &cCC752F00
+		  Case IconColor.Red
+		    oColor = &cBB372400
+		  Case IconColor.Yellow
+		    oColor = &cD4CF5100
+		  End Select
+		  
+		  Return oColor
 		End Function
 	#tag EndMethod
 
@@ -520,7 +521,7 @@ End
 		Private Function Icon(piIconColor As IconColor) As Picture
 		  Dim pa() As Picture
 		  
-		  Dim oColor As Color = me.ColorValue(piIconColor)
+		  Dim oColor As Color = Me.ColorValue(piIconColor)
 		  
 		  Dim oIcon As New Picture(12, 12)
 		  oIcon.Graphics.ForeColor = oColor
@@ -536,13 +537,13 @@ End
 		  oIcon.Graphics.DrawOval(0, 0, 24, 24)
 		  pa.Append(oIcon)
 		  
-		  return new Picture(12, 12, pa)
+		  Return New Picture(12, 12, pa)
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Function StatusValue(piIconColor As IconColor) As Integer
-		  return Integer(piIconColor)
+		  Return Integer(piIconColor)
 		End Function
 	#tag EndMethod
 
@@ -555,10 +556,10 @@ End
 		  'show with/without the Hints-Column?
 		  lstTree.Data_Init(radShowHintColumn.Value)
 		  
-		  if (psSelectKey <> "") then
+		  If (psSelectKey <> "") Then
 		    'select this item
 		    lstTree.Sel_Key_InCurrentView = psSelectKey
-		  end if
+		  End If
 		  
 		  lstTree.SetFocus
 		End Sub
@@ -567,62 +568,62 @@ End
 	#tag Method, Flags = &h21
 		Private Sub Tree_Setup()
 		  'Helper Variables to make example more readable
-		  Dim bIsExpanded As Boolean = true
-		  Dim bIsNotExpanded As Boolean = false
+		  Dim bIsExpanded As Boolean = True
+		  Dim bIsNotExpanded As Boolean = False
 		  
 		  'Build a hierarchical list (CTreeListedValues)
 		  '(we do it backwards here - you can of course do this in a recursive manner)
 		  
 		  Dim oSubTree13 As New CTreeListedValues
-		  oSubTree13.Append("Name 1.3.1", "Hint 1.3.1", "Key 1.3.1", me.StatusValue(IconColor.Green), bIsNotExpanded, nil, "Data 1.3.1")
-		  oSubTree13.Append("Name 1.3.2", "Hint 1.3.2", "Key 1.3.2", me.StatusValue(IconColor.Blue), bIsNotExpanded, nil, "Data 1.3.2")
+		  oSubTree13.Append("Name 1.3.1", "Hint 1.3.1", "Key 1.3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.3.1")
+		  oSubTree13.Append("Name 1.3.2", "Hint 1.3.2", "Key 1.3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.3.2")
 		  
 		  Dim oSubTree12 As New CTreeListedValues
-		  oSubTree12.Append("Name 1.2.1", "Hint 1.2.1", "Key 1.2.1", me.StatusValue(IconColor.Red), bIsNotExpanded, nil, "Data 1.2.1")
-		  oSubTree12.Append("Name 1.2.2", "Hint 1.2.2", "Key 1.2.2", me.StatusValue(IconColor.Green), bIsNotExpanded, nil, "Data 1.2.2")
+		  oSubTree12.Append("Name 1.2.1", "Hint 1.2.1", "Key 1.2.1", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 1.2.1")
+		  oSubTree12.Append("Name 1.2.2", "Hint 1.2.2", "Key 1.2.2", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.2.2")
 		  
 		  Dim oSubTree11 As New CTreeListedValues
-		  oSubTree11.Append("Name 1.1.1", "Hint 1.1.1", "Key 1.1.1", me.StatusValue(IconColor.Blue), bIsNotExpanded, nil, "Data 1.1.1")
-		  oSubTree11.Append("Name 1.1.2", "Hint 1.1.2", "Key 1.1.2", me.StatusValue(IconColor.Orange), bIsNotExpanded, nil, "Data 1.1.2")
+		  oSubTree11.Append("Name 1.1.1", "Hint 1.1.1", "Key 1.1.1", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.1.1")
+		  oSubTree11.Append("Name 1.1.2", "Hint 1.1.2", "Key 1.1.2", Me.StatusValue(IconColor.Orange), bIsNotExpanded, Nil, "Data 1.1.2")
 		  
 		  
 		  Dim oSubTree1 As New CTreeListedValues
 		  oSubTree1.Append("Name 1.1", "Hint 1.1", "Key 1.1", Self.constNoStatus, bIsExpanded, oSubTree11, "Data 1.1")
 		  oSubTree1.Append("Name 1.2", "Hint 1.2", "Key 1.2", Self.constNoStatus, bIsNotExpanded, oSubTree12, "Data 1.2")
-		  oSubTree1.Append("Name 1.3", "Hint 1.3", "Key 1.3", self.constNoStatus, bIsNotExpanded, oSubTree13, "Data 1.3")
+		  oSubTree1.Append("Name 1.3", "Hint 1.3", "Key 1.3", Self.constNoStatus, bIsNotExpanded, oSubTree13, "Data 1.3")
 		  
 		  Dim oSubTree3 As New CTreeListedValues
-		  oSubTree3.Append("Name 3.1", "Hint 3.1", "Key 3.1", me.StatusValue(IconColor.Green), bIsNotExpanded, nil, "Data 3.1")
-		  oSubTree3.Append("Name 3.2", "Hint 3.2", "Key 3.2", me.StatusValue(IconColor.Blue), bIsNotExpanded, nil, "Data 3.2")
-		  oSubTree3.Append("Name 3.3", "Hint 3.3", "Key 3.3", me.StatusValue(IconColor.Red), bIsNotExpanded, nil, "Data 3.3")
+		  oSubTree3.Append("Name 3.1", "Hint 3.1", "Key 3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 3.1")
+		  oSubTree3.Append("Name 3.2", "Hint 3.2", "Key 3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 3.2")
+		  oSubTree3.Append("Name 3.3", "Hint 3.3", "Key 3.3", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 3.3")
 		  
 		  'This is our final example hierarchical list, which will be represented in the TreeView
 		  '(Item 1 and 3 have a sub-tree, 2 doesn't)
 		  eoTree = New CTreeListedValues
-		  eoTree.Append("Name 1", "Hint 1", "Key 1", self.constNoStatus, bIsExpanded, oSubTree1, "Data 1")
-		  eoTree.Append("Name 2", "Hint 2", "Key 2", Self.constNoStatus, bIsNotExpanded, nil, "Data 2")
-		  eoTree.Append("Name 3", "Hint 3", "Key 3", self.constNoStatus, bIsExpanded, oSubTree3, "Data 3")
+		  eoTree.Append("Name 1", "Hint 1", "Key 1", Self.constNoStatus, bIsExpanded, oSubTree1, "Data 1")
+		  eoTree.Append("Name 2", "Hint 2", "Key 2", Self.constNoStatus, bIsNotExpanded, Nil, "Data 2")
+		  eoTree.Append("Name 3", "Hint 3", "Key 3", Self.constNoStatus, bIsExpanded, oSubTree3, "Data 3")
 		  
 		  
 		  'Setup Icons and Colors for the TreeView
 		  Dim dictIcons As New Dictionary
-		  dictIcons.Value(1) = me.Icon(IconColor.Blue)
-		  dictIcons.Value(2) = me.Icon(IconColor.Green)
-		  dictIcons.Value(3) = me.Icon(IconColor.Orange)
-		  dictIcons.Value(4) = me.Icon(IconColor.Red)
-		  dictIcons.Value(5) = me.Icon(IconColor.Yellow)
+		  dictIcons.Value(1) = Me.Icon(IconColor.Blue)
+		  dictIcons.Value(2) = Me.Icon(IconColor.Green)
+		  dictIcons.Value(3) = Me.Icon(IconColor.Orange)
+		  dictIcons.Value(4) = Me.Icon(IconColor.Red)
+		  dictIcons.Value(5) = Me.Icon(IconColor.Yellow)
 		  lstTree.Data_StatusIcons(dictIcons)
 		  
 		  Dim dictColors As New Dictionary
-		  dictColors.Value(1) = me.ColorValue(IconColor.Blue)
-		  dictColors.Value(2) = me.ColorValue(IconColor.Green)
-		  dictColors.Value(3) = me.ColorValue(IconColor.Orange)
-		  dictColors.Value(4) = me.ColorValue(IconColor.Red)
-		  dictColors.Value(5) = me.ColorValue(IconColor.Yellow)
-		  lstTree.Data_StatusColors(dictColors, true)
+		  dictColors.Value(1) = Me.ColorValue(IconColor.Blue)
+		  dictColors.Value(2) = Me.ColorValue(IconColor.Green)
+		  dictColors.Value(3) = Me.ColorValue(IconColor.Orange)
+		  dictColors.Value(4) = Me.ColorValue(IconColor.Red)
+		  dictColors.Value(5) = Me.ColorValue(IconColor.Yellow)
+		  lstTree.Data_StatusColors(dictColors, True)
 		  
 		  'Show the Tree
-		  me.Tree_Init("")
+		  Me.Tree_Init("Key 1")
 		End Sub
 	#tag EndMethod
 
@@ -655,77 +656,77 @@ End
 
 #tag Events lstTree
 	#tag Event
-		Sub OnTreeClick(poTreeList As CTreeListedValues, piPos As Integer)
-		  labClick.Text = "Status: " + Str(poTreeList.Status(piPos)) + ", Data: " + Str(poTreeList.Data(piPos)) + ", Key: " + Str(poTreeList.Key(piPos))
+		Sub OnExpandCollapseAll_Recursive(poTreeList As CTreeListedValues, piPos As Integer)
+		  labSelectionCurrent.Text = "Status: " + Str(poTreeList.Status(piPos)) + ", Data: " + Str(poTreeList.Data(piPos)) + ", Key: " + Str(poTreeList.Key(piPos))
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub OnRequestStatusChange(poTreeList As CTreeListedValues, piPos As Integer, ByRef pbDoRefresh As Boolean, piStatus As Integer = -1, psKeyPressed As String = "", pvData As Variant)
-		  #pragma unused piStatus
-		  #pragma unused pvData
+		  #Pragma unused piStatus
+		  #Pragma unused pvData
 		  'no changes for items with a sublist or status <= 0
-		  if (poTreeList.Status(piPos) <= 0) then
+		  If (poTreeList.Status(piPos) <= 0) Then
 		    'if item has a sublist, do a change -> expand it
-		    if (poTreeList.SubList(piPos) <> nil) then
-		      poTreeList.Expanded(piPos) = (not poTreeList.Expanded(piPos))
-		      pbDoRefresh = true
-		    end if
-		    return
-		  end if
+		    If (poTreeList.SubList(piPos) <> Nil) Then
+		      poTreeList.Expanded(piPos) = (Not poTreeList.Expanded(piPos))
+		      pbDoRefresh = True
+		    End If
+		    Return
+		  End If
 		  
 		  'only changes allowed for entries
-		  if (psKeyPressed <> "") and (psKeyPressed <> " ") then
+		  If (psKeyPressed <> "") And (psKeyPressed <> " ") Then
 		    
-		    pbDoRefresh = true
+		    pbDoRefresh = True
 		    
-		    select case psKeyPressed
+		    Select Case psKeyPressed
 		      
-		    case "b"
+		    Case "b"
 		      poTreeList.Status(piPos) = 1
-		    case "g"
+		    Case "g"
 		      poTreeList.Status(piPos) = 2
-		    case "o"
+		    Case "o"
 		      poTreeList.Status(piPos) = 3
-		    case "r"
+		    Case "r"
 		      poTreeList.Status(piPos) = 4
-		    case "y"
+		    Case "y"
 		      poTreeList.Status(piPos) = 5
 		      
-		    else
-		      pbDoRefresh = false
-		    end select
+		    Else
+		      pbDoRefresh = False
+		    End Select
 		    
-		    return
-		  end if
+		    Return
+		  End If
 		  
 		  'Space (not handled above) or Double-Click: Switch Status
 		  Dim iStatus As Integer = poTreeList.Status(piPos)
-		  select case iStatus
-		  case 1
+		  Select Case iStatus
+		  Case 1
 		    iStatus = 2
-		  case 2
+		  Case 2
 		    iStatus = 3
-		  case 3
+		  Case 3
 		    iStatus = 4
-		  case 4
+		  Case 4
 		    iStatus = 5
-		  else '5
+		  Else '5
 		    iStatus = 1
-		  end select
+		  End Select
 		  poTreeList.Status(piPos) = iStatus
-		  pbDoRefresh = true
-		  return
+		  pbDoRefresh = True
+		  Return
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Function OnRequestStatusChangeMenu(poTreeList As CTreeListedValues, piPos As Integer, piStatus As Integer = -1, pvData As Variant) As MenuItem
-		  #pragma unused piStatus
-		  #pragma unused pvData
+		  #Pragma unused piStatus
+		  #Pragma unused pvData
 		  
 		  'no changes for items with a sublist or status <= 0
-		  if (poTreeList.SubList(piPos) <> nil) or (poTreeList.Status(piPos) <= 0) then
-		    return nil
-		  end if
+		  If (poTreeList.SubList(piPos) <> Nil) Or (poTreeList.Status(piPos) <= 0) Then
+		    Return Nil
+		  End If
 		  
 		  Dim oMenu As New MenuItem
 		  
@@ -759,37 +760,42 @@ End
 		  oMenuItemYellow.Checked = (poTreeList.Status(piPos) = 5)
 		  oMenu.Append(oMenuItemYellow)
 		  
-		  return oMenu
+		  Return oMenu
 		End Function
 	#tag EndEvent
 	#tag Event
 		Function OnRequestStatusChangeMenuActionKey(psMenuName As String) As String
-		  select case psMenuName
+		  Select Case psMenuName
 		    
-		  case "mnuBlue"
-		    return "b"
+		  Case "mnuBlue"
+		    Return "b"
 		    
-		  case "mnuGreen"
-		    return "g"
+		  Case "mnuGreen"
+		    Return "g"
 		    
-		  case "mnuOrange"
-		    return "o"
+		  Case "mnuOrange"
+		    Return "o"
 		    
-		  case "mnuRed"
-		    return "r"
+		  Case "mnuRed"
+		    Return "r"
 		    
-		  case "mnuYellow"
-		    return "y"
+		  Case "mnuYellow"
+		    Return "y"
 		    
-		  end select
+		  End Select
 		End Function
+	#tag EndEvent
+	#tag Event
+		Sub OnChange(poTreeList As CTreeListedValues, piPos As Integer)
+		  labSelectionCurrent.Text = "Status: " + Str(poTreeList.Status(piPos)) + ", Data: " + Str(poTreeList.Data(piPos)) + ", Key: " + Str(poTreeList.Key(piPos))
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events radShowHintColumn
 	#tag Event
 		Sub Action()
-		  Dim sSelectedKey As String = lstTree.Sel_Key()
-		  self.Tree_Init(sSelectedKey)
+		  Dim sSelectedKey As String = lstTree.Sel_Key
+		  Self.Tree_Init(sSelectedKey)
 		  
 		End Sub
 	#tag EndEvent
@@ -797,8 +803,8 @@ End
 #tag Events radShowCaptionColumn
 	#tag Event
 		Sub Action()
-		  Dim sSelectedKey As String = lstTree.Sel_Key()
-		  self.Tree_Init(sSelectedKey)
+		  Dim sSelectedKey As String = lstTree.Sel_Key
+		  Self.Tree_Init(sSelectedKey)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

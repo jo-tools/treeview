@@ -2,153 +2,153 @@
 Protected Class CTreeItem
 	#tag Method, Flags = &h0
 		Function Caption() As String
-		  return me.esCaption
+		  Return Me.esCaption
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Caption(Assigns psCaption As String)
-		  me.esCaption = psCaption
+		  Me.esCaption = psCaption
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Data() As Variant
-		  return me.evData
+		  Return Me.evData
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Data(Assigns pvData As Variant)
-		  me.evData = pvData
+		  Me.evData = pvData
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Destructor()
-		  me.eoTreeMain = nil
-		  me.eoTreeSub = nil
+		  Me.eoTreeMain = Nil
+		  Me.eoTreeSub = Nil
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Expanded() As Boolean
-		  return me.ebExpanded
+		  Return Me.ebExpanded
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Expanded(Assigns pbExpanded As Boolean)
-		  me.ebExpanded = pbExpanded
+		  Me.ebExpanded = pbExpanded
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Hint() As String
-		  return me.esHint
+		  Return Me.esHint
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Hint(Assigns psHint As String)
-		  me.esHint = psHint
+		  Me.esHint = psHint
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Key() As Variant
-		  return me.evKey
+		  Return Me.evKey
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Key(Assigns pvKey As Variant)
-		  me.evKey = pvKey
+		  Me.evKey = pvKey
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Level() As Integer
-		  return me.eiLevel
+		  Return Me.eiLevel
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Level(Assigns piLevel As Integer)
-		  me.eiLevel = piLevel
+		  Me.eiLevel = piLevel
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function ParentName() As String
-		  return me.esParentName
+		  Return Me.esParentName
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub ParentName(Assigns psParentName As String)
-		  me.esParentName = psParentName
+		  Me.esParentName = psParentName
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function PosItem() As Integer
-		  return me.eiPosItem
+		  Return Me.eiPosItem
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub PosItem(Assigns piPosItem As Integer)
-		  me.eiPosItem = piPosItem
+		  Me.eiPosItem = piPosItem
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function PosParent() As Integer
-		  return me.eiPosParent
+		  Return Me.eiPosParent
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub PosParent(Assigns piPosParent As Integer)
-		  me.eiPosParent = piPosParent
+		  Me.eiPosParent = piPosParent
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Status() As Integer
-		  return me.eiStatus
+		  Return Me.eiStatus
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Status(Assigns piStatus As Integer)
-		  me.eiStatus = piStatus
+		  Me.eiStatus = piStatus
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function TreeMain() As CTreeListedValues
-		  return me.eoTreeMain
+		  Return Me.eoTreeMain
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub TreeMain(Assigns poMainbTree As CTreeListedValues)
-		  me.eoTreeMain = poMainbTree
+		  Me.eoTreeMain = poMainbTree
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function TreeSub() As CTreeListedValues
-		  return me.eoTreeSub
+		  Return Me.eoTreeSub
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub TreeSub(Assigns poTreeSub As CTreeListedValues)
-		  me.eoTreeSub = poTreeSub
+		  Me.eoTreeSub = poTreeSub
 		End Sub
 	#tag EndMethod
 

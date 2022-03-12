@@ -2,83 +2,57 @@
 Class CTreeListedValues
 	#tag Method, Flags = &h0
 		Sub Append(psName As String, psHint As String, psKey As String, piStatus As Integer, pbExpanded As Boolean, poSubList As CTreeListedValues = nil, pvData As Variant = nil, pbOnlyIfMissing As Boolean = False)
-		  '============================================================
-		  '
-		  ' Listeneintrag hinzufuegen
-		  '
-		  '============================================================
-		  
-		  if pbOnlyIfMissing then
-		    if (me.PosOfName(psName) >= 0) then return
-		  end if
+		  If pbOnlyIfMissing Then
+		    If (Me.PosOfName(psName) >= 0) Then Return
+		  End If
 		  
 		  easName.Append(psName)
 		  easKey.Append(psKey)
 		  eaiStatus.Append(piStatus)
 		  easHint.Append(psHint)
 		  eaoSubList.Append(poSubList)
-		  if (poSubList <> nil) then poSubList.ParentList = self
+		  If (poSubList <> Nil) Then poSubList.ParentList = Self
 		  eabExpanded.Append(pbExpanded)
 		  eavData.Append(pvData)
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub AppendList(poList As CTreeListedValues, pbOnlyIfMissing As Boolean = false)
-		  '============================================================
-		  '
-		  ' Listeneinträge von einer anderen Liste hinzufügen
-		  '
-		  '============================================================
+		  If (poList = Nil) Or (poList.Count < 1) Then Return
 		  
-		  if (poList = nil) or (poList.Count < 1) then return
-		  
-		  Dim iPos As Integer
-		  for iPos = 0 to poList.Last
-		    'me.Append(poList.Name(iPos), poList.Hint(iPos), poList.Key(iPos), poList.Status(iPos), poList.Expanded(iPos), poList.SubList(iPos), poList.Data(iPos), pbOnlyIfMissing)
+		  For iPos As Integer = 0 To poList.Last
 		    
 		    Dim oSublist As CTreeListedValues
-		    if (poList.SubList(iPos) <> nil) then
+		    If (poList.SubList(iPos) <> Nil) Then
 		      oSublist = New CTreeListedValues
 		      oSublist.AppendList(poList.SubList(iPos))
-		    end if
+		    End If
 		    
-		    me.Append(poList.Name(iPos), poList.Hint(iPos), poList.Key(iPos), poList.Status(iPos), poList.Expanded(iPos), oSublist, poList.Data(iPos), pbOnlyIfMissing)
-		  next
+		    Me.Append(poList.Name(iPos), poList.Hint(iPos), poList.Key(iPos), poList.Status(iPos), poList.Expanded(iPos), oSublist, poList.Data(iPos), pbOnlyIfMissing)
+		  Next
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub AppendListItem(poList As CTreeListedValues, piPos As Integer, pbOnlyIfMissing As Boolean = false)
-		  '============================================================
-		  '
-		  ' Listeneinträge von einer anderen Liste hinzufügen
-		  '
-		  '============================================================
-		  
-		  if (poList = nil) or (poList.Last < piPos) then return
-		  'me.Append(poList.Name(piPos), poList.Hint(piPos), poList.Key(piPos), poList.Status(piPos), poList.Expanded(piPos), poList.SubList(piPos), poList.Data(piPos), pbOnlyIfMissing)
+		  If (poList = Nil) Or (poList.Last < piPos) Then Return
 		  
 		  Dim oSublist As CTreeListedValues
-		  if (poList.SubList(piPos) <> nil) then
+		  If (poList.SubList(piPos) <> Nil) Then
 		    oSublist = New CTreeListedValues
 		    oSublist.AppendList(poList.SubList(piPos))
-		  end if
+		  End If
 		  
-		  me.Append(poList.Name(piPos), poList.Hint(piPos), poList.Key(piPos), poList.Status(piPos), poList.Expanded(piPos), oSublist, poList.Data(piPos), pbOnlyIfMissing)
+		  Me.Append(poList.Name(piPos), poList.Hint(piPos), poList.Key(piPos), poList.Status(piPos), poList.Expanded(piPos), oSublist, poList.Data(piPos), pbOnlyIfMissing)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Clear()
-		  '============================================================
-		  '
-		  ' Liste loeschen
-		  '
-		  '============================================================
-		  
 		  Redim easName(-1)
 		  Redim easKey(-1)
 		  Redim eaiStatus(-1)
@@ -86,56 +60,34 @@ Class CTreeListedValues
 		  Redim eaoSubList(-1)
 		  Redim eabExpanded(-1)
 		  Redim eavData(-1)
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Count() As Integer
-		  '============================================================
-		  '
-		  ' Anzahl Listeneintraege
-		  '
-		  '============================================================
-		  
-		  return me.Last + 1
+		  Return Me.Last + 1
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Data(piPosition As Integer) As Variant
-		  '============================================================
-		  '
-		  ' Wert
-		  '
-		  '============================================================
-		  
-		  return eavData(piPosition)
+		  Return eavData(piPosition)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Data(piPosition As Integer, Assigns pvData As Variant)
-		  '============================================================
-		  '
-		  ' Name
-		  '
-		  '============================================================
-		  
 		  eavData(piPosition) = pvData
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Delete(piPosition As Integer)
-		  '============================================================
-		  '
-		  ' Listeneintrag entfernen
-		  '
-		  '============================================================
-		  
-		  if (piPosition < 0) then return
+		  If (piPosition < 0) Then Return
 		  
 		  easName.Remove(piPosition)
 		  easKey.Remove(piPosition)
@@ -144,70 +96,47 @@ Class CTreeListedValues
 		  eaoSubList.Remove(piPosition)
 		  eabExpanded.Remove(piPosition)
 		  eavData.Remove(piPosition)
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub DeleteByKey(psKey As String)
-		  '============================================================
-		  '
-		  ' Listeneintrag entfernen
-		  '
-		  '============================================================
-		  
-		  me.Delete(me.PosOfKey(psKey))
+		  Me.Delete(Me.PosOfKey(psKey))
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub DeleteByName(psName As String)
-		  '============================================================
-		  '
-		  ' Listeneintrag entfernen
-		  '
-		  '============================================================
-		  
-		  me.Delete(me.PosOfName(psName))
+		  Me.Delete(Me.PosOfName(psName))
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Destructor()
-		  ReDim eabExpanded(-1)
-		  ReDim eaiStatus(-1)
-		  ReDim eaoSubList(-1)
-		  ReDim easHint(-1)
-		  ReDim easKey(-1)
-		  ReDim easName(-1)
-		  ReDim eavData(-1)
-		  ParentList = nil
+		  Redim eabExpanded(-1)
+		  Redim eaiStatus(-1)
+		  Redim eaoSubList(-1)
+		  Redim easHint(-1)
+		  Redim easKey(-1)
+		  Redim easName(-1)
+		  Redim eavData(-1)
+		  ParentList = Nil
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Expanded(piPosition As Integer) As Boolean
-		  '============================================================
-		  '
-		  ' Expandiert
-		  '
-		  '============================================================
-		  
-		  return eabExpanded(piPosition)
+		  Return eabExpanded(piPosition)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Expanded(piPosition As Integer, Assigns pbExpanded As Boolean)
-		  '============================================================
-		  '
-		  ' Expandiert
-		  '
-		  '============================================================
-		  
 		  eabExpanded(piPosition) = pbExpanded
 		  
 		End Sub
@@ -215,139 +144,83 @@ Class CTreeListedValues
 
 	#tag Method, Flags = &h0
 		Function Hint(piPosition As Integer) As String
-		  '============================================================
-		  '
-		  ' Hint
-		  '
-		  '============================================================
+		  Return easHint(piPosition)
 		  
-		  return easHint(piPosition)
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Hint(piPosition As Integer, Assigns psHint As String)
-		  '============================================================
-		  '
-		  ' Hint
-		  '
-		  '============================================================
-		  
 		  easHint(piPosition) = psHint
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Key(piPosition As Integer) As String
-		  '============================================================
-		  '
-		  ' Key
-		  '
-		  '============================================================
-		  
-		  if (piPosition >= 0) then return easKey(piPosition)
+		  If (piPosition >= 0) Then Return easKey(piPosition)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Key(piPosition As Integer, Assigns psKey As String)
-		  '============================================================
-		  '
-		  ' Key
-		  '
-		  '============================================================
-		  
 		  easKey(piPosition) = psKey
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Last() As Integer
-		  '============================================================
-		  '
-		  ' Letzte Positon der Listeneintraege (Anzahl - 1)
-		  '
-		  '============================================================
+		  Return UBound(easName)
 		  
-		  return UBound(easName)
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Name(piPosition As Integer) As String
-		  '============================================================
-		  '
-		  ' Name
-		  '
-		  '============================================================
-		  
-		  if (piPosition >= 0) then return easName(piPosition)
+		  If (piPosition >= 0) Then Return easName(piPosition)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Name(piPosition As Integer, Assigns psName As String)
-		  '============================================================
-		  '
-		  ' Name
-		  '
-		  '============================================================
-		  
 		  easName(piPosition) = psName
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function ParentList() As CTreeListedValues
-		  if (me.eoParentList <> nil) and (me.eoParentList.Value <> nil) and (me.eoParentList.Value IsA CTreeListedValues) then return CTreeListedValues(me.eoParentList.Value)
+		  If (Me.eoParentList <> Nil) And (Me.eoParentList.Value <> Nil) And (Me.eoParentList.Value IsA CTreeListedValues) Then Return CTreeListedValues(Me.eoParentList.Value)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub ParentList(Assigns poParentList As CTreeListedValues)
-		  me.eoParentList = New WeakRef(poParentList)
+		  Me.eoParentList = New WeakRef(poParentList)
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function PosOfKey(psKey As String) As Integer
-		  '============================================================
-		  '
-		  ' Positon eines Listeneintrags suchen (-1 = nicht gefunden)
-		  '
-		  '============================================================
-		  
-		  return easKey.IndexOf(psKey)
-		  
+		  Return easKey.IndexOf(psKey)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function PosOfName(psName As String) As Integer
-		  '============================================================
-		  '
-		  ' Positon eines Listeneintrags suchen (-1 = nicht gefunden)
-		  '
-		  '============================================================
-		  
-		  return easName.IndexOf(psName)
-		  
+		  Return easName.IndexOf(psName)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub SortByHint()
-		  '============================================================
-		  '
-		  ' Einträge gemäss Name sortieren
-		  '
-		  '============================================================
-		  
 		  easHint.SortWith(easKey, eaiStatus, easName, eaoSubList, eabExpanded, eavData)
 		  
 		End Sub
@@ -355,12 +228,6 @@ Class CTreeListedValues
 
 	#tag Method, Flags = &h0
 		Sub SortByName()
-		  '============================================================
-		  '
-		  ' Einträge gemäss Name sortieren
-		  '
-		  '============================================================
-		  
 		  easName.SortWith(easKey, eaiStatus, easHint, eaoSubList, eabExpanded, eavData)
 		  
 		End Sub
@@ -368,86 +235,64 @@ Class CTreeListedValues
 
 	#tag Method, Flags = &h0
 		Function Status(piPosition As Integer) As Integer
-		  '============================================================
-		  '
-		  ' Status
-		  '
-		  '============================================================
-		  
-		  return eaiStatus(piPosition)
+		  Return eaiStatus(piPosition)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Status(piPosition As Integer, Assigns piStatus As Integer)
-		  '============================================================
-		  '
-		  ' Status
-		  '
-		  '============================================================
-		  
 		  eaiStatus(piPosition) = piStatus
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function SubList(piPosition As Integer) As CTreeListedValues
-		  '============================================================
-		  '
-		  ' Subliste
-		  '
-		  '============================================================
-		  
-		  if eaoSubList(piPosition) IsA CTreeListedValues then
-		    return eaoSubList(piPosition)
-		  else
-		    return nil
-		  end if
+		  If eaoSubList(piPosition) IsA CTreeListedValues Then
+		    Return eaoSubList(piPosition)
+		  Else
+		    Return Nil
+		  End If
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub SubList(piPosition As Integer, Assigns poSubList As CTreeListedValues)
-		  '============================================================
-		  '
-		  ' Subliste
-		  '
-		  '============================================================
-		  
 		  eaoSubList(piPosition) = poSubList
-		  if (poSubList <> nil) then poSubList.ParentList = self
+		  If (poSubList <> Nil) Then poSubList.ParentList = Self
+		  
 		End Sub
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h1
-		Protected eabExpanded() As Boolean
+	#tag Property, Flags = &h21
+		Private eabExpanded() As Boolean
 	#tag EndProperty
 
-	#tag Property, Flags = &h1
-		Protected eaiStatus() As Integer
+	#tag Property, Flags = &h21
+		Private eaiStatus() As Integer
 	#tag EndProperty
 
-	#tag Property, Flags = &h1
-		Protected eaoSubList() As CTreeListedValues
+	#tag Property, Flags = &h21
+		Private eaoSubList() As CTreeListedValues
 	#tag EndProperty
 
-	#tag Property, Flags = &h1
-		Protected easHint() As String
+	#tag Property, Flags = &h21
+		Private easHint() As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h1
-		Protected easKey() As String
+	#tag Property, Flags = &h21
+		Private easKey() As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h1
-		Protected easName() As String
+	#tag Property, Flags = &h21
+		Private easName() As String
 	#tag EndProperty
 
-	#tag Property, Flags = &h1
-		Protected eavData() As Variant
+	#tag Property, Flags = &h21
+		Private eavData() As Variant
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
