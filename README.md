@@ -7,10 +7,11 @@ Xojo example project
 ...
 
 ### ScreenShots
-Example 1:  
-<!--
-![ScreenShot: Example 1](screenshots/TreeView_1.png?raw=true)
--->
+TreeView: Example app - macOS  
+![ScreenShot: Example App macOS](screenshots/TreeView_macOS.png?raw=true)
+
+TreeView: Example app - Windows  
+![ScreenShot: Example App Windows](screenshots/TreeView_Windows.png?raw=true)
 
 ## Xojo
 ### Requirements
