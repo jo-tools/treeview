@@ -5,7 +5,7 @@ Xojo example project
 
 ## Description
 Hierarchical Listboxes are a bit tricky with Xojo. This example project shows
-a reusable approach. The approach shown is:
+a reusable approach:
 - A class named ```CTreeListedValues```.  
   This is basically a simple List with a couple of properties: ```name, hint, key, status, data, sublist```. The ```sublist``` is just another instance of a ```CTreeListedValues``` list, allowing you to build a hierarchical structure.
 - A Control subclass ```lstTreeView```.
@@ -40,7 +40,8 @@ The Desktop application Xojo example project ```TreeView.xojo_project``` is usin
 
 ### How to use in your own Xojo project?
 1. Copy and paste the folder ```treeview``` *(containing the classes ```CTreeListedValues``` and ```CTreeItem```, as well as the Listbox Subclass ```lstTreeView```)* to your project.
-2. Have a look at how the example projects is using the provided Methods.  
+2. Place an instance of the ListBox subclass ```lstTreeView``` on a Window.
+3. Have a look at how the example projects is using the provided Methods.  
    - Build and show a Tree: ```Window1.Tree_Setup```
    - Handle Events: ```Window1.lstTree```
 
