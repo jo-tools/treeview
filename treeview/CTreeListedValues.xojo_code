@@ -24,7 +24,7 @@ Class CTreeListedValues
 		  
 		  For iPos As Integer = 0 To poList.Last
 		    
-		    Dim oSublist As CTreeListedValues
+		    Var oSublist As CTreeListedValues
 		    If (poList.SubList(iPos) <> Nil) Then
 		      oSublist = New CTreeListedValues
 		      oSublist.AddList(poList.SubList(iPos))
@@ -40,7 +40,7 @@ Class CTreeListedValues
 		Sub AddListItem(poList As CTreeListedValues, piPos As Integer, pbOnlyIfMissing As Boolean = false)
 		  If (poList = Nil) Or (poList.Last < piPos) Then Return
 		  
-		  Dim oSublist As CTreeListedValues
+		  Var oSublist As CTreeListedValues
 		  If (poList.SubList(piPos) <> Nil) Then
 		    oSublist = New CTreeListedValues
 		    oSublist.AddList(poList.SubList(piPos))

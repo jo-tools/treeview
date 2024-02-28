@@ -25,16 +25,16 @@ Inherits DesktopListBox
 		  'only show menu if entries are available
 		  If (oTreeStructure <> Nil) And (oTreeStructure.Count > 0) And (Me.RowCount > 0) Then
 		    'if clicked on a choice: possible sub-menu
-		    Dim bItemIsSelected As Boolean = False
-		    Dim bItemIsSelectedAndHasNoSubtree As Boolean = False
-		    Dim bItemIsExpanded As Boolean = False
+		    Var bItemIsSelected As Boolean = False
+		    Var bItemIsSelectedAndHasNoSubtree As Boolean = False
+		    Var bItemIsExpanded As Boolean = False
 		    If (eiRowMousePos >= 0) And (Me.SelectedRowIndex >= 0) And (Me.RowTag(Me.SelectedRowIndex) <> Nil) And (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then
 		      bItemIsSelected = True
 		      bItemIsSelectedAndHasNoSubtree = (CTreeItem(Me.RowTag(Me.SelectedRowIndex)).TreeSub = Nil)
 		      bItemIsExpanded = CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Expanded
-		      Dim oChangeMenu As DesktopMenuItem = OnRequestStatusChangeMenu(CTreeItem(Me.RowTag(Me.SelectedRowIndex)).TreeMain, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).PosItem, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Status, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Data)
+		      Var oChangeMenu As DesktopMenuItem = OnRequestStatusChangeMenu(CTreeItem(Me.RowTag(Me.SelectedRowIndex)).TreeMain, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).PosItem, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Status, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Data)
 		      If (oChangeMenu <> Nil) And (oChangeMenu.Count > 0) Then
-		        Dim iPos As Integer
+		        Var iPos As Integer
 		        For iPos = 0 To oChangeMenu.Count - 1
 		          //Linux und Cocoa: via MenuItem.Clone
 		          #If TargetMacOS Or TargetLinux  Then
@@ -44,7 +44,7 @@ Inherits DesktopListBox
 		          #EndIf
 		        Next
 		        
-		        Dim oSeparator As New DesktopMenuItem
+		        Var oSeparator As New DesktopMenuItem
 		        oSeparator.Name = "mnuSeparator"
 		        oSeparator.Text = "-"
 		        base.AddMenu(oSeparator)
@@ -53,19 +53,19 @@ Inherits DesktopListBox
 		    
 		    'Default Menu Entries
 		    If bItemIsSelected And (Not bItemIsSelectedAndHasNoSubtree) Then
-		      Dim oExpandItem As New DesktopMenuItem
+		      Var oExpandItem As New DesktopMenuItem
 		      oExpandItem.Text = Me.constCaption_ExpandItem
 		      oExpandItem.Name = "mnuExpandItem"
 		      oExpandItem.Enabled = (Not bItemIsExpanded)
 		      base.AddMenu(oExpandItem)
 		      
-		      Dim oCollapseItem As New DesktopMenuItem
+		      Var oCollapseItem As New DesktopMenuItem
 		      oCollapseItem.Text = Me.constCaption_CollapseItem
 		      oCollapseItem.Name = "mnuCollapseItem"
 		      oCollapseItem.Enabled = bItemIsExpanded
 		      base.AddMenu(oCollapseItem)
 		      
-		      Dim oSeparatorItem As New DesktopMenuItem
+		      Var oSeparatorItem As New DesktopMenuItem
 		      oSeparatorItem.Name = "mnuSeparatorItem"
 		      oSeparatorItem.Text = "-"
 		      base.AddMenu(oSeparatorItem)
@@ -75,12 +75,12 @@ Inherits DesktopListBox
 		      If (oTreeStructure.SubList(i) = Nil) Then Continue
 		      
 		      'at least 1 Sub-Liste available
-		      Dim oExpandAll As New DesktopMenuItem
+		      Var oExpandAll As New DesktopMenuItem
 		      oExpandAll.Text = Me.constCaption_ExpandAll
 		      oExpandAll.Name = "mnuExpandAll"
 		      base.AddMenu(oExpandAll)
 		      
-		      Dim oCollapseAll As New DesktopMenuItem
+		      Var oCollapseAll As New DesktopMenuItem
 		      oCollapseAll.Text = Me.constCaption_CollapseAll
 		      oCollapseAll.Name = "mnuCollapseAll"
 		      base.AddMenu(oCollapseAll)
@@ -98,8 +98,8 @@ Inherits DesktopListBox
 	#tag Event
 		Function ContextualMenuItemSelected(selectedItem As DesktopMenuItem) As Boolean
 		  If (selectedItem <> Nil) Then
-		    Dim iExpandRow As Integer = -1
-		    Dim sCurrentKey As String
+		    Var iExpandRow As Integer = -1
+		    Var sCurrentKey As String
 		    If (eiRowMousePos >= 0) And (Me.SelectedRowIndex >= 0) And (eiRowMousePos = Me.SelectedRowIndex) Then
 		      iExpandRow = eiRowMousePos
 		    End If
@@ -122,7 +122,7 @@ Inherits DesktopListBox
 		      Self.ExpandCollapseAll(iExpandRow, False)
 		      If (sCurrentKey <> "") Then Self.Sel_Key_InCurrentView = sCurrentKey
 		    Else
-		      Dim sKey As String = OnRequestStatusChangeMenuActionKey(selectedItem.Name)
+		      Var sKey As String = OnRequestStatusChangeMenuActionKey(selectedItem.Name)
 		      If Self.Do_KeyDown(sKey, Me.SelectedRowIndex) Then
 		      End If
 		    End Select
@@ -146,7 +146,7 @@ Inherits DesktopListBox
 
 	#tag Event
 		Function DragOver(x As Integer, y As Integer, obj As DragItem, action As DragItem.Types) As Boolean
-		  Dim row As Integer = Me.RowFromXY(x, y)
+		  Var row As Integer = Me.RowFromXY(x, y)
 		  If (row < Me.RowCount) And (row >= 0) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
 		    Return OnDragOver(CTreeItem(Me.RowTag(row)).TreeMain, CTreeItem(Me.RowTag(row)).PosItem, obj, action)
 		  End If
@@ -192,7 +192,7 @@ Inherits DesktopListBox
 
 	#tag Event
 		Function KeyDown(key As String) As Boolean
-		  Dim iRow As Integer = Me.SelectedRowIndex
+		  Var iRow As Integer = Me.SelectedRowIndex
 		  
 		  If Do_KeyDown(Key, iRow) Then Return True
 		  
@@ -230,7 +230,7 @@ Inherits DesktopListBox
 		    
 		    CTreeItem(Me.RowTag(row)).Expanded = False
 		    
-		    Dim oTree As CTreeListedValues = CTreeItem(Me.RowTag(row)).TreeMain
+		    Var oTree As CTreeListedValues = CTreeItem(Me.RowTag(row)).TreeMain
 		    If (oTree = Nil) Or (CTreeItem(Me.RowTag(row)).PosItem < 0) Then Return
 		    oTree.Expanded(CTreeItem(Me.RowTag(row)).PosItem) = False
 		    
@@ -244,7 +244,7 @@ Inherits DesktopListBox
 		    
 		    CTreeItem(Me.RowTag(row)).Expanded = True
 		    
-		    Dim oTree As CTreeListedValues = CTreeItem(Me.RowTag(row)).TreeMain
+		    Var oTree As CTreeListedValues = CTreeItem(Me.RowTag(row)).TreeMain
 		    If (oTree = Nil) Or (CTreeItem(Me.RowTag(row)).PosItem < 0) Then Return
 		    oTree.Expanded(CTreeItem(Me.RowTag(row)).PosItem) = True
 		    oTree = CTreeItem(Me.RowTag(row)).TreeSub
@@ -262,7 +262,7 @@ Inherits DesktopListBox
 
 	#tag Event
 		Sub SelectionChanged()
-		  Dim row As Integer = Me.SelectedRowIndex
+		  Var row As Integer = Me.SelectedRowIndex
 		  
 		  If (row < Me.RowCount) And (row >= 0) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
 		    OnChange(CTreeItem(Me.RowTag(row)).TreeMain, CTreeItem(Me.RowTag(row)).PosItem)
@@ -352,7 +352,7 @@ Inherits DesktopListBox
 		  
 		  If (poTree = Nil) Or (Me.RowCount < 1) Then Return
 		  
-		  Dim vKey As Variant = poTree.Key(piPos)
+		  Var vKey As Variant = poTree.Key(piPos)
 		  
 		  If (piRow >= 0) Then
 		    'update given row
@@ -380,7 +380,7 @@ Inherits DesktopListBox
 		  '
 		  '============================================================
 		  
-		  Dim bNeedRefresh As Boolean = True
+		  Var bNeedRefresh As Boolean = True
 		  OnRequestStatusChange(poTreeList, piPos, bNeedRefresh, piCurrentStatus, psKeyPressed, pvData)
 		  
 		  If bNeedRefresh Then
@@ -402,7 +402,7 @@ Inherits DesktopListBox
 		  If (poTree = Nil) Or (piPos < 0) Then Return
 		  If (piUpdateRow >= 0) And (Me.RowCount <= piUpdateRow) Then Return
 		  
-		  Dim oTreeItem As New CTreeItem
+		  Var oTreeItem As New CTreeItem
 		  oTreeItem.TreeMain = poTree
 		  oTreeItem.PosItem = piPos
 		  
@@ -491,7 +491,7 @@ Inherits DesktopListBox
 		Sub Data_StatusTextStyle(pdictTextStyles As Dictionary)
 		  '============================================================
 		  '
-		  ' Text-Format für Status
+		  ' Text-Format for Status
 		  '
 		  '============================================================
 		  
@@ -547,7 +547,7 @@ Inherits DesktopListBox
 		  If (Key = "") Then Return True
 		  
 		  If (iRow >= 0) And (Me.RowTag(iRow) <> Nil) And (Me.RowTag(iRow) IsA CTreeItem) Then
-		    Dim bChangeStatus As Boolean = False
+		    Var bChangeStatus As Boolean = False
 		    
 		    'Left
 		    If (Key.AscByte = 28) Then
@@ -682,11 +682,11 @@ Inherits DesktopListBox
 		    End If
 		    
 		    
-		    Dim iOffset As Integer = x
+		    Var iOffset As Integer = x
 		    If (column = Me.constCol_Caption) And (Me.RowImageAt(row) <> Nil) Then
 		      iOffset = iOffset + eiOffsetXIcon 'Offset Icon - Text
 		    End If
-		    Dim sText As String = Me.CellTextAt(row, column).ReplaceLineEndings(" ")
+		    Var sText As String = Me.CellTextAt(row, column).ReplaceLineEndings(" ")
 		    g.DrawText(sText, iOffset, y, g.Width, True)
 		    Return True
 		    
@@ -707,7 +707,7 @@ Inherits DesktopListBox
 		  If (oTreeStructure = Nil) Then Return
 		  If (oTreeStructure.Count < 0) Then Return
 		  
-		  Dim oExpandTree As CTreeListedValues = oTreeStructure
+		  Var oExpandTree As CTreeListedValues = oTreeStructure
 		  If (piRow >= 0) And (piRow <= (Me.RowCount - 1)) Then
 		    If (Me.RowTag(piRow) <> Nil) And (Me.RowTag(piRow) IsA CTreeItem) Then
 		      'expand this entry
@@ -750,8 +750,7 @@ Inherits DesktopListBox
 
 	#tag Method, Flags = &h0
 		Function GetCollapsedKeys() As String()
-		  
-		  Dim aKeys() As String
+		  Var aKeys() As String
 		  If (Me.RowCount < 1) Then Return aKeys
 		  
 		  For i As Integer = (Me.RowCount - 1) DownTo 0
@@ -821,8 +820,8 @@ Inherits DesktopListBox
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Function RowTag(piRow As Integer) As Variant
+	#tag Method, Flags = &h21
+		Private Function RowTag(piRow As Integer) As Variant
 		  '============================================================
 		  '
 		  ' RowTag (TreeItem)
@@ -840,8 +839,8 @@ Inherits DesktopListBox
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Sub RowTag(piRow As Integer, Assigns poTreeItem As CTreeItem)
+	#tag Method, Flags = &h21
+		Private Sub RowTag(piRow As Integer, Assigns poTreeItem As CTreeItem)
 		  '============================================================
 		  '
 		  ' RowTag (TreeItem)
@@ -855,7 +854,6 @@ Inherits DesktopListBox
 
 	#tag Method, Flags = &h0
 		Function Sel_Key() As String
-		  
 		  If (Me.SelectedRowIndex = -1) Then Return ""
 		  If Not (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then Return ""
 		  
@@ -869,7 +867,7 @@ Inherits DesktopListBox
 		Sub Sel_Key_InCurrentView(Assigns psTryToSelKey As String)
 		  If (psTryToSelKey = "") Then Return
 		  
-		  Dim iPos As Integer
+		  Var iPos As Integer
 		  iPos = Data_PosOfKey(psTryToSelKey)
 		  If (iPos >= 0) Then Me.SelectedRowIndex = iPos
 		  
@@ -878,7 +876,6 @@ Inherits DesktopListBox
 
 	#tag Method, Flags = &h0
 		Function Sel_Status() As Integer
-		  
 		  If (Me.SelectedRowIndex = -1) Then Return -1
 		  If Not (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then Return -1
 		  
@@ -949,11 +946,11 @@ Inherits DesktopListBox
 
 
 	#tag Note, Name = Example
-		Dim oSubSubTree As New CTreeListedValues
+		Var oSubSubTree As New CTreeListedValues
 		oSubSubTree.Add("Entry 2.3.1", "Hint 2.3.1", "E231", 1, false, nil)
 		oSubSubTree.Add("Entry 2.3.2", "Hint 2.3.2", "E232", 1, false, nil)
 		
-		Dim oSubTree As New CTreeListedValues
+		Var oSubTree As New CTreeListedValues
 		oSubTree.Add("Entry 2.1", "Hint 2.1", "E21", 1, false, nil)
 		oSubTree.Add("Entry 2.2", "Hint 2.2", "E22", 2, false, nil)
 		oSubTree.Add("Entry 2.3", "Hint 2.3", "E23", 2, false, oSubSubTree)
@@ -963,14 +960,14 @@ Inherits DesktopListBox
 		'This is our final example hierarchical list, which will be represented in the TreeView
 		'(Entry 2 has a sub-tree, 1 and 3 don't)
 		
-		Dim oTree As New CTreeListedValues
+		Var oTree As New CTreeListedValues
 		oTree.Add("Entry 1.0", "Hint 1.0", "E10", 2, false, nil)
 		oTree.Add("Entry 2.0", "Hint 2.0", "E20", 2, true, oSubTree)
 		oTree.Add("Entry 3.0", "Hint 3.0", "E30", 2, false, nil)
 		
 		
 		'Define Icons for Status 1, 2
-		Dim dictIcons As New Dictionary
+		Var dictIcons As New Dictionary
 		dictIcons.Value(1) = iconOne
 		dictIcons.Value(2) = iconTwo
 		lstTree.Data_StatusIcons(dictIcons)

@@ -25,26 +25,29 @@ Begin DesktopWindow Window1
    Visible         =   True
    Width           =   600
    Begin lstTreeView lstTree
-      AutoDeactivate  =   True
-      AutoHideScrollbars=   True
+      AllowAutoDeactivate=   True
+      AllowAutoHideScrollbars=   True
+      AllowExpandableRows=   False
+      AllowFocusRing  =   True
+      AllowResizableColumns=   False
+      AllowRowDragging=   False
+      AllowRowReordering=   False
       Bold            =   False
-      Border          =   True
       ColumnCount     =   1
-      ColumnsResizable=   False
       ColumnWidths    =   ""
-      DataField       =   ""
-      DataSource      =   ""
       DefaultRowHeight=   -1
+      DropIndicatorVisible=   False
       Enabled         =   True
-      EnableDrag      =   False
-      EnableDragReorder=   False
-      GridLinesHorizontal=   0
-      GridLinesVertical=   0
-      HasHeading      =   False
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      GridLineStyle   =   0
+      HasBorder       =   True
+      HasHeader       =   False
+      HasHorizontalScrollbar=   False
+      HasVerticalScrollbar=   True
       HeadingIndex    =   -1
       Height          =   245
-      HelpTag         =   ""
-      Hierarchical    =   False
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
@@ -56,34 +59,28 @@ Begin DesktopWindow Window1
       LockRight       =   True
       LockTop         =   True
       RequiresSelection=   False
+      RowSelectionType=   0
       Scope           =   2
-      ScrollbarHorizontal=   False
-      ScrollBarVertical=   True
-      SelectionType   =   0
-      ShowDropIndicator=   False
       TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   115
       Transparent     =   True
       Underline       =   False
-      UseFocusRing    =   True
       Visible         =   True
       Width           =   560
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
    Begin DesktopLabel labSelectionCurrentTitle
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -100,11 +97,9 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Current Selection:"
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   370
       Transparent     =   True
       Underline       =   False
@@ -112,13 +107,13 @@ Begin DesktopWindow Window1
       Width           =   140
    End
    Begin DesktopLabel labSelectionCurrent
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -135,11 +130,9 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "..."
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   370
       Transparent     =   True
       Underline       =   False
@@ -147,12 +140,14 @@ Begin DesktopWindow Window1
       Width           =   408
    End
    Begin DesktopRadioButton radShowHintColumn
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
       Caption         =   " Show Hint Column "
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -166,9 +161,7 @@ Begin DesktopWindow Window1
       TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   445
       Transparent     =   True
       Underline       =   False
@@ -177,13 +170,13 @@ Begin DesktopWindow Window1
       Width           =   200
    End
    Begin DesktopLabel labInfo
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   64
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -200,11 +193,9 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Switch Status with:\n  - Contextual Menu\n  - Keys: b, g, o, r, y\n  - Change: Double-Click, <space>"
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "SmallSystem"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   416
       Transparent     =   True
       Underline       =   False
@@ -212,10 +203,11 @@ Begin DesktopWindow Window1
       Width           =   247
    End
    Begin DesktopSeparator sepBottom
-      AutoDeactivate  =   True
+      Active          =   False
+      AllowAutoDeactivate=   True
+      AllowTabStop    =   True
       Enabled         =   True
       Height          =   4
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -224,22 +216,29 @@ Begin DesktopWindow Window1
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   10
       TabPanelIndex   =   0
-      TabStop         =   True
+      Tooltip         =   ""
       Top             =   400
       Transparent     =   True
       Visible         =   True
       Width           =   600
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
    End
    Begin DesktopRadioButton radShowCaptionColumn
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
       Caption         =   " Caption Column only "
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -253,9 +252,7 @@ Begin DesktopWindow Window1
       TabIndex        =   12
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   415
       Transparent     =   True
       Underline       =   False
@@ -264,15 +261,13 @@ Begin DesktopWindow Window1
       Width           =   200
    End
    Begin DesktopCanvas cnvAppIcon
-      AcceptFocus     =   False
-      AcceptTabs      =   False
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   True
+      AllowTabs       =   False
       Backdrop        =   0
-      DoubleBuffer    =   False
       Enabled         =   True
-      EraseBackground =   "True"
       Height          =   64
-      HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -285,22 +280,20 @@ Begin DesktopWindow Window1
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
-      UseFocusRing    =   True
       Visible         =   True
       Width           =   64
    End
    Begin DesktopCanvas cnvPayPal
-      AcceptFocus     =   False
-      AcceptTabs      =   False
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   True
+      AllowTabs       =   False
       Backdrop        =   0
-      DoubleBuffer    =   False
       Enabled         =   True
-      EraseBackground =   "True"
       Height          =   30
-      HelpTag         =   "https://paypal.me/jotools"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   474
@@ -313,20 +306,20 @@ Begin DesktopWindow Window1
       TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
-      UseFocusRing    =   True
       Visible         =   True
       Width           =   106
    End
    Begin DesktopLabel labAppName
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   True
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
-      HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -343,11 +336,9 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppName"
-      TextAlign       =   2
+      TextAlignment   =   0
       TextColor       =   &c0072D800
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
       Underline       =   True
@@ -355,13 +346,13 @@ Begin DesktopWindow Window1
       Width           =   120
    End
    Begin DesktopLabel labAppVersion
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -378,11 +369,9 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppVersion"
-      TextAlign       =   2
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
       Underline       =   False
@@ -390,13 +379,13 @@ Begin DesktopWindow Window1
       Width           =   120
    End
    Begin DesktopLabel labContact
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
-      HelpTag         =   "xojo@jo-tools.ch"
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -413,11 +402,9 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Contact"
-      TextAlign       =   2
+      TextAlignment   =   0
       TextColor       =   &c0072CE00
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
       Underline       =   True
@@ -425,13 +412,13 @@ Begin DesktopWindow Window1
       Width           =   70
    End
    Begin DesktopLabel labThanks
-      AutoDeactivate  =   True
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -448,11 +435,9 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Would you like to say 'Thank you'?"
-      TextAlign       =   3
+      TextAlignment   =   0
       TextColor       =   &c66666600
-      TextFont        =   "SmallSystem"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
       Underline       =   False
@@ -460,10 +445,11 @@ Begin DesktopWindow Window1
       Width           =   209
    End
    Begin DesktopSeparator sepTop
-      AutoDeactivate  =   True
+      Active          =   False
+      AllowAutoDeactivate=   True
+      AllowTabStop    =   True
       Enabled         =   True
       Height          =   3
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -472,14 +458,19 @@ Begin DesktopWindow Window1
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
+      Tooltip         =   ""
       Top             =   100
       Transparent     =   True
       Visible         =   True
       Width           =   600
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
    End
 End
 #tag EndDesktopWindow
@@ -502,7 +493,7 @@ End
 
 	#tag Method, Flags = &h21
 		Private Function ColorValue(piIconColor As IconColor) As Color
-		  Dim oColor As Color = &c000000
+		  Var oColor As Color = &c000000
 		  
 		  Select Case piIconColor
 		  Case IconColor.Blue
@@ -523,11 +514,11 @@ End
 
 	#tag Method, Flags = &h21
 		Private Function Icon(piIconColor As IconColor) As Picture
-		  Dim pa() As Picture
+		  Var pa() As Picture
 		  
-		  Dim oColor As Color = Me.ColorValue(piIconColor)
+		  Var oColor As Color = Me.ColorValue(piIconColor)
 		  
-		  Dim oIcon As New Picture(12, 12)
+		  Var oIcon As New Picture(12, 12)
 		  oIcon.Graphics.DrawingColor = oColor
 		  oIcon.Graphics.FillOval(0, 0, 12, 12)
 		  oIcon.Graphics.DrawingColor = &c000000
@@ -572,31 +563,31 @@ End
 	#tag Method, Flags = &h21
 		Private Sub Tree_Setup()
 		  'Helper Variables to make example more readable
-		  Dim bIsExpanded As Boolean = True
-		  Dim bIsNotExpanded As Boolean = False
+		  Var bIsExpanded As Boolean = True
+		  Var bIsNotExpanded As Boolean = False
 		  
 		  'Build a hierarchical list (CTreeListedValues)
 		  '(we do it backwards here - you can of course do this in a recursive manner)
 		  
-		  Dim oSubTree13 As New CTreeListedValues
+		  Var oSubTree13 As New CTreeListedValues
 		  oSubTree13.Add("Name 1.3.1", "Hint 1.3.1", "Key 1.3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.3.1")
 		  oSubTree13.Add("Name 1.3.2", "Hint 1.3.2", "Key 1.3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.3.2")
 		  
-		  Dim oSubTree12 As New CTreeListedValues
+		  Var oSubTree12 As New CTreeListedValues
 		  oSubTree12.Add("Name 1.2.1", "Hint 1.2.1", "Key 1.2.1", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 1.2.1")
 		  oSubTree12.Add("Name 1.2.2", "Hint 1.2.2", "Key 1.2.2", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.2.2")
 		  
-		  Dim oSubTree11 As New CTreeListedValues
+		  Var oSubTree11 As New CTreeListedValues
 		  oSubTree11.Add("Name 1.1.1", "Hint 1.1.1", "Key 1.1.1", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.1.1")
 		  oSubTree11.Add("Name 1.1.2", "Hint 1.1.2", "Key 1.1.2", Me.StatusValue(IconColor.Orange), bIsNotExpanded, Nil, "Data 1.1.2")
 		  
 		  
-		  Dim oSubTree1 As New CTreeListedValues
+		  Var oSubTree1 As New CTreeListedValues
 		  oSubTree1.Add("Name 1.1", "Hint 1.1", "Key 1.1", Self.constNoStatus, bIsExpanded, oSubTree11, "Data 1.1")
 		  oSubTree1.Add("Name 1.2", "Hint 1.2", "Key 1.2", Self.constNoStatus, bIsNotExpanded, oSubTree12, "Data 1.2")
 		  oSubTree1.Add("Name 1.3", "Hint 1.3", "Key 1.3", Self.constNoStatus, bIsNotExpanded, oSubTree13, "Data 1.3")
 		  
-		  Dim oSubTree3 As New CTreeListedValues
+		  Var oSubTree3 As New CTreeListedValues
 		  oSubTree3.Add("Name 3.1", "Hint 3.1", "Key 3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 3.1")
 		  oSubTree3.Add("Name 3.2", "Hint 3.2", "Key 3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 3.2")
 		  oSubTree3.Add("Name 3.3", "Hint 3.3", "Key 3.3", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 3.3")
@@ -610,7 +601,7 @@ End
 		  
 		  
 		  'Setup Icons and Colors for the TreeView
-		  Dim dictIcons As New Dictionary
+		  Var dictIcons As New Dictionary
 		  dictIcons.Value(1) = Me.Icon(IconColor.Blue)
 		  dictIcons.Value(2) = Me.Icon(IconColor.Green)
 		  dictIcons.Value(3) = Me.Icon(IconColor.Orange)
@@ -618,7 +609,7 @@ End
 		  dictIcons.Value(5) = Me.Icon(IconColor.Yellow)
 		  lstTree.Data_StatusIcons(dictIcons)
 		  
-		  Dim dictColors As New Dictionary
+		  Var dictColors As New Dictionary
 		  dictColors.Value(1) = Me.ColorValue(IconColor.Blue)
 		  dictColors.Value(2) = Me.ColorValue(IconColor.Green)
 		  dictColors.Value(3) = Me.ColorValue(IconColor.Orange)
@@ -704,7 +695,7 @@ End
 		  End If
 		  
 		  'Space (not handled above) or Double-Click: Switch Status
-		  Dim iStatus As Integer = poTreeList.Status(piPos)
+		  Var iStatus As Integer = poTreeList.Status(piPos)
 		  Select Case iStatus
 		  Case 1
 		    iStatus = 2
@@ -732,33 +723,33 @@ End
 		    Return Nil
 		  End If
 		  
-		  Dim oMenu As New DesktopMenuItem
+		  Var oMenu As New DesktopMenuItem
 		  
-		  Dim oMenuItemBlue As New DesktopMenuItem
+		  Var oMenuItemBlue As New DesktopMenuItem
 		  oMenuItemBlue.Text = "Blue"
 		  oMenuItemBlue.Name = "mnuBlue"
 		  oMenuItemBlue.HasCheckMark = (poTreeList.Status(piPos) = 1)
 		  oMenu.AddMenu(oMenuItemBlue)
 		  
-		  Dim oMenuItemGreen As New DesktopMenuItem
+		  Var oMenuItemGreen As New DesktopMenuItem
 		  oMenuItemGreen.Text = "Green"
 		  oMenuItemGreen.Name = "mnuGreen"
 		  oMenuItemGreen.HasCheckMark = (poTreeList.Status(piPos) = 2)
 		  oMenu.AddMenu(oMenuItemGreen)
 		  
-		  Dim oMenuItemOrange As New DesktopMenuItem
+		  Var oMenuItemOrange As New DesktopMenuItem
 		  oMenuItemOrange.Text = "Orange"
 		  oMenuItemOrange.Name = "mnuOrange"
 		  oMenuItemOrange.HasCheckMark = (poTreeList.Status(piPos) = 3)
 		  oMenu.AddMenu(oMenuItemOrange)
 		  
-		  Dim oMenuItemRed As New DesktopMenuItem
+		  Var oMenuItemRed As New DesktopMenuItem
 		  oMenuItemRed.Text = "Red"
 		  oMenuItemRed.Name = "mnuRed"
 		  oMenuItemRed.HasCheckMark = (poTreeList.Status(piPos) = 4)
 		  oMenu.AddMenu(oMenuItemRed)
 		  
-		  Dim oMenuItemYellow As New DesktopMenuItem
+		  Var oMenuItemYellow As New DesktopMenuItem
 		  oMenuItemYellow.Text = "Yellow"
 		  oMenuItemYellow.Name = "mnuYellow"
 		  oMenuItemYellow.HasCheckMark = (poTreeList.Status(piPos) = 5)
@@ -798,7 +789,7 @@ End
 #tag Events radShowHintColumn
 	#tag Event
 		Sub ValueChanged()
-		  Dim sSelectedKey As String = lstTree.Sel_Key
+		  Var sSelectedKey As String = lstTree.Sel_Key
 		  Self.Tree_Init(sSelectedKey)
 		  
 		End Sub
@@ -807,7 +798,7 @@ End
 #tag Events radShowCaptionColumn
 	#tag Event
 		Sub ValueChanged()
-		  Dim sSelectedKey As String = lstTree.Sel_Key
+		  Var sSelectedKey As String = lstTree.Sel_Key
 		  Self.Tree_Init(sSelectedKey)
 		End Sub
 	#tag EndEvent
@@ -1012,8 +1003,7 @@ End
 			"6 - Rounded Window"
 			"7 - Global Floating Window"
 			"8 - Sheet Window"
-			"9 - Metal Window"
-			"11 - Modeless Dialog"
+			"9 - Modeless Dialog"
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -1076,8 +1066,8 @@ End
 		Visible=true
 		Group="Background"
 		InitialValue="&hFFFFFF"
-		Type="Color"
-		EditorType="Color"
+		Type="ColorGroup"
+		EditorType="ColorGroup"
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Name"
@@ -1188,7 +1178,7 @@ End
 		Visible=true
 		Group="Menus"
 		InitialValue=""
-		Type="MenuBar"
+		Type="DesktopMenuBar"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
