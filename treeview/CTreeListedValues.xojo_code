@@ -1,25 +1,25 @@
 #tag Class
 Class CTreeListedValues
 	#tag Method, Flags = &h0
-		Sub Append(psName As String, psHint As String, psKey As String, piStatus As Integer, pbExpanded As Boolean, poSubList As CTreeListedValues = nil, pvData As Variant = nil, pbOnlyIfMissing As Boolean = False)
+		Sub Add(psName As String, psHint As String, psKey As String, piStatus As Integer, pbExpanded As Boolean, poSubList As CTreeListedValues = nil, pvData As Variant = nil, pbOnlyIfMissing As Boolean = False)
 		  If pbOnlyIfMissing Then
 		    If (Me.PosOfName(psName) >= 0) Then Return
 		  End If
 		  
-		  easName.Append(psName)
-		  easKey.Append(psKey)
-		  eaiStatus.Append(piStatus)
-		  easHint.Append(psHint)
-		  eaoSubList.Append(poSubList)
+		  easName.Add(psName)
+		  easKey.Add(psKey)
+		  eaiStatus.Add(piStatus)
+		  easHint.Add(psHint)
+		  eaoSubList.Add(poSubList)
 		  If (poSubList <> Nil) Then poSubList.ParentList = Self
-		  eabExpanded.Append(pbExpanded)
-		  eavData.Append(pvData)
+		  eabExpanded.Add(pbExpanded)
+		  eavData.Add(pvData)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub AppendList(poList As CTreeListedValues, pbOnlyIfMissing As Boolean = false)
+		Sub AddList(poList As CTreeListedValues, pbOnlyIfMissing As Boolean = false)
 		  If (poList = Nil) Or (poList.Count < 1) Then Return
 		  
 		  For iPos As Integer = 0 To poList.Last
@@ -27,26 +27,26 @@ Class CTreeListedValues
 		    Dim oSublist As CTreeListedValues
 		    If (poList.SubList(iPos) <> Nil) Then
 		      oSublist = New CTreeListedValues
-		      oSublist.AppendList(poList.SubList(iPos))
+		      oSublist.AddList(poList.SubList(iPos))
 		    End If
 		    
-		    Me.Append(poList.Name(iPos), poList.Hint(iPos), poList.Key(iPos), poList.Status(iPos), poList.Expanded(iPos), oSublist, poList.Data(iPos), pbOnlyIfMissing)
+		    Me.Add(poList.Name(iPos), poList.Hint(iPos), poList.Key(iPos), poList.Status(iPos), poList.Expanded(iPos), oSublist, poList.Data(iPos), pbOnlyIfMissing)
 		  Next
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub AppendListItem(poList As CTreeListedValues, piPos As Integer, pbOnlyIfMissing As Boolean = false)
+		Sub AddListItem(poList As CTreeListedValues, piPos As Integer, pbOnlyIfMissing As Boolean = false)
 		  If (poList = Nil) Or (poList.Last < piPos) Then Return
 		  
 		  Dim oSublist As CTreeListedValues
 		  If (poList.SubList(piPos) <> Nil) Then
 		    oSublist = New CTreeListedValues
-		    oSublist.AppendList(poList.SubList(piPos))
+		    oSublist.AddList(poList.SubList(piPos))
 		  End If
 		  
-		  Me.Append(poList.Name(piPos), poList.Hint(piPos), poList.Key(piPos), poList.Status(piPos), poList.Expanded(piPos), oSublist, poList.Data(piPos), pbOnlyIfMissing)
+		  Me.Add(poList.Name(piPos), poList.Hint(piPos), poList.Key(piPos), poList.Status(piPos), poList.Expanded(piPos), oSublist, poList.Data(piPos), pbOnlyIfMissing)
 		  
 		End Sub
 	#tag EndMethod
@@ -307,6 +307,7 @@ Class CTreeListedValues
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -314,18 +315,23 @@ Class CTreeListedValues
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -333,6 +339,7 @@ Class CTreeListedValues
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

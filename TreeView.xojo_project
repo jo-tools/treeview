@@ -1,13 +1,13 @@
 Type=Desktop
 RBProjectVersion=2023.04
-MinIDEVersion=20150400
+MinIDEVersion=20210300
 OrigIDEVersion=00000000
 Folder=resources;resources;&h00000000194DAFFF;&h0000000000000000;false
 MultiImage=AppIcon_64;resources/AppIcon_64.xojo_image;&h000000004D698FFF;&h00000000194DAFFF;false
 Folder=treeview;treeview;&h000000006543AFFF;&h0000000000000000;false
 Folder=exampleapp;exampleapp;&h000000004AAEB7FF;&h0000000000000000;false
 Class=App;exampleapp/App.xojo_code;&h0000000026A01FFF;&h000000004AAEB7FF;false
-Window=Window1;exampleapp/Window1.xojo_window;&h00000000724F4FFF;&h000000004AAEB7FF;false
+DesktopWindow=Window1;exampleapp/Window1.xojo_window;&h00000000724F4FFF;&h000000004AAEB7FF;false
 MenuBar=MainMenuBar;exampleapp/MainMenuBar.xojo_menu;&h00000000036A8FFF;&h000000004AAEB7FF;false
 BuildSteps=Build Automation;Build Automation.xojo_code;&h000000004A6B37FF;&h0000000000000000;false
 Class=CTreeListedValues;treeview/CTreeListedValues.xojo_code;&h000000001BE37FFF;&h000000006543AFFF;false

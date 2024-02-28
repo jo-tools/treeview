@@ -1,29 +1,27 @@
-#tag Window
-Begin Window Window1
-   BackColor       =   &cFFFFFF00
+#tag DesktopWindow
+Begin DesktopWindow Window1
    Backdrop        =   0
-   CloseButton     =   True
-   Compatibility   =   ""
+   BackgroundColor =   &cFFFFFF00
    Composite       =   False
-   Frame           =   0
+   DefaultLocation =   0
    FullScreen      =   False
-   FullScreenButton=   False
-   HasBackColor    =   False
+   HasBackgroundColor=   False
+   HasCloseButton  =   True
+   HasFullScreenButton=   False
+   HasMaximizeButton=   True
+   HasMinimizeButton=   True
    Height          =   500
    ImplicitInstance=   True
-   LiveResize      =   True
    MacProcID       =   0
-   MaxHeight       =   32000
-   MaximizeButton  =   True
-   MaxWidth        =   32000
+   MaximumHeight   =   32000
+   MaximumWidth    =   32000
    MenuBar         =   57315327
    MenuBarVisible  =   True
-   MinHeight       =   400
-   MinimizeButton  =   True
-   MinWidth        =   450
-   Placement       =   0
+   MinimumHeight   =   400
+   MinimumWidth    =   450
    Resizeable      =   True
    Title           =   "TreeView"
+   Type            =   0
    Visible         =   True
    Width           =   600
    Begin lstTreeView lstTree
@@ -78,7 +76,7 @@ Begin Window Window1
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
-   Begin Label labSelectionCurrentTitle
+   Begin DesktopLabel labSelectionCurrentTitle
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -113,7 +111,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   140
    End
-   Begin Label labSelectionCurrent
+   Begin DesktopLabel labSelectionCurrent
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -148,7 +146,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   408
    End
-   Begin RadioButton radShowHintColumn
+   Begin DesktopRadioButton radShowHintColumn
       AutoDeactivate  =   True
       Bold            =   False
       Caption         =   " Show Hint Column "
@@ -178,7 +176,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   200
    End
-   Begin Label labInfo
+   Begin DesktopLabel labInfo
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -213,7 +211,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   247
    End
-   Begin Separator sepBottom
+   Begin DesktopSeparator sepBottom
       AutoDeactivate  =   True
       Enabled         =   True
       Height          =   4
@@ -235,7 +233,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   600
    End
-   Begin RadioButton radShowCaptionColumn
+   Begin DesktopRadioButton radShowCaptionColumn
       AutoDeactivate  =   True
       Bold            =   False
       Caption         =   " Caption Column only "
@@ -265,14 +263,14 @@ Begin Window Window1
       Visible         =   True
       Width           =   200
    End
-   Begin Canvas cnvAppIcon
+   Begin DesktopCanvas cnvAppIcon
       AcceptFocus     =   False
       AcceptTabs      =   False
       AutoDeactivate  =   True
       Backdrop        =   0
       DoubleBuffer    =   False
       Enabled         =   True
-      EraseBackground =   True
+      EraseBackground =   "True"
       Height          =   64
       HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
@@ -293,14 +291,14 @@ Begin Window Window1
       Visible         =   True
       Width           =   64
    End
-   Begin Canvas cnvPayPal
+   Begin DesktopCanvas cnvPayPal
       AcceptFocus     =   False
       AcceptTabs      =   False
       AutoDeactivate  =   True
       Backdrop        =   0
       DoubleBuffer    =   False
       Enabled         =   True
-      EraseBackground =   True
+      EraseBackground =   "True"
       Height          =   30
       HelpTag         =   "https://paypal.me/jotools"
       Index           =   -2147483648
@@ -321,7 +319,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   106
    End
-   Begin Label labAppName
+   Begin DesktopLabel labAppName
       AutoDeactivate  =   True
       Bold            =   True
       DataField       =   ""
@@ -345,7 +343,7 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppName"
-      TextAlign       =   1
+      TextAlign       =   2
       TextColor       =   &c0072D800
       TextFont        =   "System"
       TextSize        =   0.0
@@ -356,7 +354,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   120
    End
-   Begin Label labAppVersion
+   Begin DesktopLabel labAppVersion
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -380,7 +378,7 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppVersion"
-      TextAlign       =   1
+      TextAlign       =   2
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
@@ -391,7 +389,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   120
    End
-   Begin Label labContact
+   Begin DesktopLabel labContact
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -415,7 +413,7 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Contact"
-      TextAlign       =   1
+      TextAlign       =   2
       TextColor       =   &c0072CE00
       TextFont        =   "System"
       TextSize        =   0.0
@@ -426,7 +424,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   70
    End
-   Begin Label labThanks
+   Begin DesktopLabel labThanks
       AutoDeactivate  =   True
       Bold            =   False
       DataField       =   ""
@@ -450,7 +448,7 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Would you like to say 'Thank you'?"
-      TextAlign       =   2
+      TextAlign       =   3
       TextColor       =   &c66666600
       TextFont        =   "SmallSystem"
       TextSize        =   0.0
@@ -461,7 +459,7 @@ Begin Window Window1
       Visible         =   True
       Width           =   209
    End
-   Begin Separator sepTop
+   Begin DesktopSeparator sepTop
       AutoDeactivate  =   True
       Enabled         =   True
       Height          =   3
@@ -484,11 +482,11 @@ Begin Window Window1
       Width           =   600
    End
 End
-#tag EndWindow
+#tag EndDesktopWindow
 
 #tag WindowCode
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  Self.Title = constAppName
 		  
 		  Self.Tree_Setup
@@ -528,14 +526,14 @@ End
 		  oIcon.Graphics.FillOval(0, 0, 12, 12)
 		  oIcon.Graphics.ForeColor = &c000000
 		  oIcon.Graphics.DrawOval(0, 0, 12, 12)
-		  pa.Append(oIcon)
+		  pa.Add(oIcon)
 		  
 		  oIcon = New Picture(24, 24)
 		  oIcon.Graphics.ForeColor = oColor
 		  oIcon.Graphics.FillOval(0, 0, 24, 24)
 		  oIcon.Graphics.ForeColor = &c000000
 		  oIcon.Graphics.DrawOval(0, 0, 24, 24)
-		  pa.Append(oIcon)
+		  pa.Add(oIcon)
 		  
 		  Return New Picture(12, 12, pa)
 		End Function
@@ -575,34 +573,34 @@ End
 		  '(we do it backwards here - you can of course do this in a recursive manner)
 		  
 		  Dim oSubTree13 As New CTreeListedValues
-		  oSubTree13.Append("Name 1.3.1", "Hint 1.3.1", "Key 1.3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.3.1")
-		  oSubTree13.Append("Name 1.3.2", "Hint 1.3.2", "Key 1.3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.3.2")
+		  oSubTree13.Add("Name 1.3.1", "Hint 1.3.1", "Key 1.3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.3.1")
+		  oSubTree13.Add("Name 1.3.2", "Hint 1.3.2", "Key 1.3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.3.2")
 		  
 		  Dim oSubTree12 As New CTreeListedValues
-		  oSubTree12.Append("Name 1.2.1", "Hint 1.2.1", "Key 1.2.1", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 1.2.1")
-		  oSubTree12.Append("Name 1.2.2", "Hint 1.2.2", "Key 1.2.2", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.2.2")
+		  oSubTree12.Add("Name 1.2.1", "Hint 1.2.1", "Key 1.2.1", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 1.2.1")
+		  oSubTree12.Add("Name 1.2.2", "Hint 1.2.2", "Key 1.2.2", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.2.2")
 		  
 		  Dim oSubTree11 As New CTreeListedValues
-		  oSubTree11.Append("Name 1.1.1", "Hint 1.1.1", "Key 1.1.1", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.1.1")
-		  oSubTree11.Append("Name 1.1.2", "Hint 1.1.2", "Key 1.1.2", Me.StatusValue(IconColor.Orange), bIsNotExpanded, Nil, "Data 1.1.2")
+		  oSubTree11.Add("Name 1.1.1", "Hint 1.1.1", "Key 1.1.1", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.1.1")
+		  oSubTree11.Add("Name 1.1.2", "Hint 1.1.2", "Key 1.1.2", Me.StatusValue(IconColor.Orange), bIsNotExpanded, Nil, "Data 1.1.2")
 		  
 		  
 		  Dim oSubTree1 As New CTreeListedValues
-		  oSubTree1.Append("Name 1.1", "Hint 1.1", "Key 1.1", Self.constNoStatus, bIsExpanded, oSubTree11, "Data 1.1")
-		  oSubTree1.Append("Name 1.2", "Hint 1.2", "Key 1.2", Self.constNoStatus, bIsNotExpanded, oSubTree12, "Data 1.2")
-		  oSubTree1.Append("Name 1.3", "Hint 1.3", "Key 1.3", Self.constNoStatus, bIsNotExpanded, oSubTree13, "Data 1.3")
+		  oSubTree1.Add("Name 1.1", "Hint 1.1", "Key 1.1", Self.constNoStatus, bIsExpanded, oSubTree11, "Data 1.1")
+		  oSubTree1.Add("Name 1.2", "Hint 1.2", "Key 1.2", Self.constNoStatus, bIsNotExpanded, oSubTree12, "Data 1.2")
+		  oSubTree1.Add("Name 1.3", "Hint 1.3", "Key 1.3", Self.constNoStatus, bIsNotExpanded, oSubTree13, "Data 1.3")
 		  
 		  Dim oSubTree3 As New CTreeListedValues
-		  oSubTree3.Append("Name 3.1", "Hint 3.1", "Key 3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 3.1")
-		  oSubTree3.Append("Name 3.2", "Hint 3.2", "Key 3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 3.2")
-		  oSubTree3.Append("Name 3.3", "Hint 3.3", "Key 3.3", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 3.3")
+		  oSubTree3.Add("Name 3.1", "Hint 3.1", "Key 3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 3.1")
+		  oSubTree3.Add("Name 3.2", "Hint 3.2", "Key 3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 3.2")
+		  oSubTree3.Add("Name 3.3", "Hint 3.3", "Key 3.3", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 3.3")
 		  
 		  'This is our final example hierarchical list, which will be represented in the TreeView
 		  '(Item 1 and 3 have a sub-tree, 2 doesn't)
 		  eoTree = New CTreeListedValues
-		  eoTree.Append("Name 1", "Hint 1", "Key 1", Self.constNoStatus, bIsExpanded, oSubTree1, "Data 1")
-		  eoTree.Append("Name 2", "Hint 2", "Key 2", Self.constNoStatus, bIsNotExpanded, Nil, "Data 2")
-		  eoTree.Append("Name 3", "Hint 3", "Key 3", Self.constNoStatus, bIsExpanded, oSubTree3, "Data 3")
+		  eoTree.Add("Name 1", "Hint 1", "Key 1", Self.constNoStatus, bIsExpanded, oSubTree1, "Data 1")
+		  eoTree.Add("Name 2", "Hint 2", "Key 2", Self.constNoStatus, bIsNotExpanded, Nil, "Data 2")
+		  eoTree.Add("Name 3", "Hint 3", "Key 3", Self.constNoStatus, bIsExpanded, oSubTree3, "Data 3")
 		  
 		  
 		  'Setup Icons and Colors for the TreeView
@@ -719,7 +717,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function OnRequestStatusChangeMenu(poTreeList As CTreeListedValues, piPos As Integer, piStatus As Integer = -1, pvData As Variant) As MenuItem
+		Function OnRequestStatusChangeMenu(poTreeList As CTreeListedValues, piPos As Integer, piStatus As Integer = -1, pvData As Variant) As DesktopMenuItem
 		  #Pragma unused piStatus
 		  #Pragma unused pvData
 		  
@@ -728,37 +726,37 @@ End
 		    Return Nil
 		  End If
 		  
-		  Dim oMenu As New MenuItem
+		  Dim oMenu As New DesktopMenuItem
 		  
-		  Dim oMenuItemBlue As New MenuItem
+		  Dim oMenuItemBlue As New DesktopMenuItem
 		  oMenuItemBlue.Text = "Blue"
 		  oMenuItemBlue.Name = "mnuBlue"
-		  oMenuItemBlue.Checked = (poTreeList.Status(piPos) = 1)
-		  oMenu.Append(oMenuItemBlue)
+		  oMenuItemBlue.HasCheckMark = (poTreeList.Status(piPos) = 1)
+		  oMenu.AddMenu(oMenuItemBlue)
 		  
-		  Dim oMenuItemGreen As New MenuItem
+		  Dim oMenuItemGreen As New DesktopMenuItem
 		  oMenuItemGreen.Text = "Green"
 		  oMenuItemGreen.Name = "mnuGreen"
-		  oMenuItemGreen.Checked = (poTreeList.Status(piPos) = 2)
-		  oMenu.Append(oMenuItemGreen)
+		  oMenuItemGreen.HasCheckMark = (poTreeList.Status(piPos) = 2)
+		  oMenu.AddMenu(oMenuItemGreen)
 		  
-		  Dim oMenuItemOrange As New MenuItem
+		  Dim oMenuItemOrange As New DesktopMenuItem
 		  oMenuItemOrange.Text = "Orange"
 		  oMenuItemOrange.Name = "mnuOrange"
-		  oMenuItemOrange.Checked = (poTreeList.Status(piPos) = 3)
-		  oMenu.Append(oMenuItemOrange)
+		  oMenuItemOrange.HasCheckMark = (poTreeList.Status(piPos) = 3)
+		  oMenu.AddMenu(oMenuItemOrange)
 		  
-		  Dim oMenuItemRed As New MenuItem
+		  Dim oMenuItemRed As New DesktopMenuItem
 		  oMenuItemRed.Text = "Red"
 		  oMenuItemRed.Name = "mnuRed"
-		  oMenuItemRed.Checked = (poTreeList.Status(piPos) = 4)
-		  oMenu.Append(oMenuItemRed)
+		  oMenuItemRed.HasCheckMark = (poTreeList.Status(piPos) = 4)
+		  oMenu.AddMenu(oMenuItemRed)
 		  
-		  Dim oMenuItemYellow As New MenuItem
+		  Dim oMenuItemYellow As New DesktopMenuItem
 		  oMenuItemYellow.Text = "Yellow"
 		  oMenuItemYellow.Name = "mnuYellow"
-		  oMenuItemYellow.Checked = (poTreeList.Status(piPos) = 5)
-		  oMenu.Append(oMenuItemYellow)
+		  oMenuItemYellow.HasCheckMark = (poTreeList.Status(piPos) = 5)
+		  oMenu.AddMenu(oMenuItemYellow)
 		  
 		  Return oMenu
 		End Function
@@ -793,7 +791,7 @@ End
 #tag EndEvents
 #tag Events radShowHintColumn
 	#tag Event
-		Sub Action()
+		Sub ValueChanged()
 		  Dim sSelectedKey As String = lstTree.Sel_Key
 		  Self.Tree_Init(sSelectedKey)
 		  
@@ -802,7 +800,7 @@ End
 #tag EndEvents
 #tag Events radShowCaptionColumn
 	#tag Event
-		Sub Action()
+		Sub ValueChanged()
 		  Dim sSelectedKey As String = lstTree.Sel_Key
 		  Self.Tree_Init(sSelectedKey)
 		End Sub
@@ -810,21 +808,21 @@ End
 #tag EndEvents
 #tag Events cnvAppIcon
 	#tag Event
-		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		Sub Paint(g As Graphics, areas() As Rect)
 		  #Pragma unused areas
 		  
 		  g.DrawPicture(AppIcon_64, 0, 0)
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub MouseUp(X As Integer, Y As Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
 		    ShowURL(constWebsiteUrl)
 		  End If
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #Pragma unused X
 		  #Pragma unused Y
 		  
@@ -845,7 +843,7 @@ End
 #tag EndEvents
 #tag Events cnvPayPal
 	#tag Event
-		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		Sub Paint(g As Graphics, areas() As Rect)
 		  #Pragma unused areas
 		  
 		  g.ForeColor = &cFFFFFF
@@ -870,14 +868,14 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub MouseUp(X As Integer, Y As Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
 		    ShowURL("https://paypal.me/jotools")
 		  End If
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #Pragma unused X
 		  #Pragma unused Y
 		  
@@ -887,21 +885,21 @@ End
 #tag EndEvents
 #tag Events labAppName
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  Me.Text = constAppName
-		  Me.TextSize = 18
+		  Me.FontSize = 18
 		  Me.Bold = True
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub MouseUp(X As Integer, Y As Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
 		    ShowURL(constWebsiteUrl)
 		  End If
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #Pragma unused X
 		  #Pragma unused Y
 		  
@@ -922,9 +920,9 @@ End
 #tag EndEvents
 #tag Events labAppVersion
 	#tag Event
-		Sub Open()
-		  If (App.ShortVersion <> "") Then
-		    Me.Text = App.ShortVersion
+		Sub Opening()
+		  If (App.Version <> "") Then
+		    Me.Text = App.Version
 		    Return
 		  End If
 		  
@@ -945,7 +943,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #Pragma unused X
 		  #Pragma unused Y
 		  
@@ -953,7 +951,7 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
-		Sub MouseUp(X As Integer, Y As Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
 		    ShowURL("mailto:xojo@jo-tools.ch")
 		  End If
@@ -962,74 +960,43 @@ End
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="Name"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Interfaces"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Super"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Width"
-		Visible=true
-		Group="Size"
-		InitialValue="600"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Size"
-		InitialValue="400"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinWidth"
+		Name="MinimumWidth"
 		Visible=true
 		Group="Size"
 		InitialValue="64"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MinHeight"
+		Name="MinimumHeight"
 		Visible=true
 		Group="Size"
 		InitialValue="64"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MaxWidth"
+		Name="MaximumWidth"
 		Visible=true
 		Group="Size"
 		InitialValue="32000"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MaxHeight"
+		Name="MaximumHeight"
 		Visible=true
 		Group="Size"
 		InitialValue="32000"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Frame"
+		Name="Type"
 		Visible=true
 		Group="Frame"
 		InitialValue="0"
-		Type="Integer"
+		Type="Types"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Document"
@@ -1046,78 +1013,43 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Title"
-		Visible=true
-		Group="Frame"
-		InitialValue="Untitled"
-		Type="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="CloseButton"
+		Name="HasCloseButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Resizeable"
+		Name="HasMaximizeButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MaximizeButton"
+		Name="HasMinimizeButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MinimizeButton"
-		Visible=true
-		Group="Frame"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="FullScreenButton"
+		Name="HasFullScreenButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="False"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Composite"
-		Group="OS X (Carbon)"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MacProcID"
-		Group="OS X (Carbon)"
-		InitialValue="0"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ImplicitInstance"
-		Visible=true
-		Group="Behavior"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Placement"
+		Name="DefaultLocation"
 		Visible=true
 		Group="Behavior"
 		InitialValue="0"
-		Type="Integer"
+		Type="Locations"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Default"
@@ -1128,54 +1060,132 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="&hFFFFFF"
+		Type="Color"
+		EditorType="Color"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Interfaces"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Super"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Width"
+		Visible=true
+		Group="Size"
+		InitialValue="600"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Size"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Title"
+		Visible=true
+		Group="Frame"
+		InitialValue="Untitled"
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Resizeable"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Composite"
+		Visible=false
+		Group="OS X (Carbon)"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MacProcID"
+		Visible=false
+		Group="OS X (Carbon)"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Visible"
 		Visible=true
 		Group="Behavior"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="LiveResize"
-		Group="Behavior"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="FullScreen"
+		Visible=false
 		Group="Behavior"
 		InitialValue="False"
 		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
-		Visible=true
-		Group="Background"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="BackColor"
-		Visible=true
-		Group="Background"
-		InitialValue="&hFFFFFF"
-		Type="Color"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Backdrop"
 		Visible=true
 		Group="Background"
+		InitialValue=""
 		Type="Picture"
-		EditorType="Picture"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MenuBar"
 		Visible=true
 		Group="Menus"
+		InitialValue=""
 		Type="MenuBar"
-		EditorType="MenuBar"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MenuBarVisible"
@@ -1183,6 +1193,6 @@ End
 		Group="Deprecated"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
