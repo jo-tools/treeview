@@ -550,7 +550,7 @@ Inherits DesktopListBox
 		    Dim bChangeStatus As Boolean = False
 		    
 		    'Left
-		    If (AscB(Key) = 28) Then
+		    If (Key.AscByte = 28) Then
 		      If (CTreeItem(Me.RowTag(iRow)).TreeSub <> Nil) Then
 		        Me.RowExpandedAt(iRow) = False
 		        Return True
@@ -558,7 +558,7 @@ Inherits DesktopListBox
 		    End If
 		    
 		    'Right
-		    If (AscB(Key) = 29) Then
+		    If (Key.AscByte = 29) Then
 		      If (CTreeItem(Me.RowTag(iRow)).TreeSub <> Nil) Then
 		        Me.RowExpandedAt(iRow) = True
 		        Return True
@@ -570,18 +570,9 @@ Inherits DesktopListBox
 		      bChangeStatus = True
 		    End If
 		    
-		    
-		    'Expand/Collapse
-		    'if (Key = " ") then
-		    'if (CTreeItem(me.RowTag(iRow)).TreeSub <> nil) then
-		    'Me.Expanded(iRow) = (not Me.Expanded(iRow))
-		    'return true
-		    'end if
-		    'end if
-		    
-		    
 		    'A-Z, 0-9
-		    If (Not bChangeStatus) And (InStr("abcdefghijklmnopqrstuvwxyz01234567890 ", Key) > 0) Then
+		    Var chars As String = "abcdefghijklmnopqrstuvwxyz01234567890 "
+		    If (Not bChangeStatus) And (chars.IndexOf(Key) > 0) Then
 		      bChangeStatus = True
 		    End If
 		    
@@ -616,23 +607,23 @@ Inherits DesktopListBox
 		      'At least on Windows, Xojo doesn't draw the whole row with a background selection
 		      'so we do that here ourselves. Should be improved with Declares to get the correct
 		      'colors for the state 'window is not active'...
-		      g.foreColor = If(Self.Active, HighlightColor, If(IsDarkMode, &c242424, &cC9C5BB))
-		      g.FillRect(0, 0, g.width, g.height)
+		      g.DrawingColor = If(Self.Active, HighlightColor, If(IsDarkMode, &c242424, &cC9C5BB))
+		      g.FillRectangle(0, 0, g.width, g.height)
 		      Return True
 		    #EndIf
 		  End If
 		  
 		  If (Me.Enabled = False) Then
-		    g.foreColor = FillColor
-		    g.FillRect(0, 0, g.width, g.height)
+		    g.DrawingColor = Color.FillColor
+		    g.FillRectangle(0, 0, g.width, g.height)
 		    Return True
 		  End If
 		  
 		  If (row < Me.RowCount) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
 		    If (eacColorsBackground <> Nil) And eacColorsBackground.HasKey(CTreeItem(Me.RowTag(row)).Status) Then
 		      If eacColors.HasKey(CTreeItem(Me.RowTag(row)).Status) Then
-		        g.ForeColor = eacColorsBackground.Value(CTreeItem(Me.RowTag(row)).Status)
-		        g.FillRect(0, 0, g.width, g.height)
+		        g.DrawingColor = eacColorsBackground.Value(CTreeItem(Me.RowTag(row)).Status)
+		        g.FillRectangle(0, 0, g.width, g.height)
 		      End If
 		      Return True
 		    End If
@@ -672,21 +663,21 @@ Inherits DesktopListBox
 		    
 		    ' Selection
 		    If (row = Me.SelectedRowIndex) And (Me.Enabled) Then
-		      g.ForeColor = &cFFFFFF
+		      g.DrawingColor = &cFFFFFF
 		    Else
 		      If (eacColors <> Nil) And eacColors.HasKey(CTreeItem(Me.RowTag(row)).Status) Then
-		        g.ForeColor = eacColors.Lookup(CTreeItem(Me.RowTag(row)).Status, TextColor)
+		        g.DrawingColor = eacColors.Lookup(CTreeItem(Me.RowTag(row)).Status, Color.TextColor)
 		      Else
-		        g.ForeColor = TextColor
+		        g.DrawingColor = Color.TextColor
 		      End If
 		    End If
 		    
 		    If (ebTextColorOnlyForHint And (column <> Me.constCol_Hint)) Then
 		      ' Selection
 		      If (row = Me.SelectedRowIndex) And (Me.Enabled) Then
-		        g.ForeColor = &cffffff
+		        g.DrawingColor = &cffffff
 		      Else
-		        g.ForeColor = TextColor
+		        g.DrawingColor = Color.TextColor
 		      End If
 		    End If
 		    
@@ -695,8 +686,8 @@ Inherits DesktopListBox
 		    If (column = Me.constCol_Caption) And (Me.RowImageAt(row) <> Nil) Then
 		      iOffset = iOffset + eiOffsetXIcon 'Offset Icon - Text
 		    End If
-		    Dim sText As String = ReplaceLineEndings(Me.CellTextAt(row, column), " ")
-		    g.DrawString(sText, iOffset, y, g.Width, True)
+		    Dim sText As String = Me.CellTextAt(row, column).ReplaceLineEndings(" ")
+		    g.DrawText(sText, iOffset, y, g.Width, True)
 		    Return True
 		    
 		  End If
@@ -813,7 +804,7 @@ Inherits DesktopListBox
 		  
 		  #If TargetMacOS Then
 		    
-		    If ((AscB(psKey) = 13) Or (AscB(psKey) = 3)) Then
+		    If (psKey.AscByte = 13) Or (psKey.AscByte = 3) Then
 		      Return True
 		    End If
 		    

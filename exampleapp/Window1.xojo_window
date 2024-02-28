@@ -489,6 +489,12 @@ End
 		Sub Opening()
 		  Self.Title = constAppName
 		  
+		  #If TargetMacOS Then
+		    Var rect As Xojo.Rect = Self.Bounds
+		    rect.Top = DesktopDisplay.DisplayAt(0).AvailableTop
+		    Self.Bounds = rect
+		  #EndIf
+		  
 		  Self.Tree_Setup
 		End Sub
 	#tag EndEvent
@@ -522,16 +528,16 @@ End
 		  Dim oColor As Color = Me.ColorValue(piIconColor)
 		  
 		  Dim oIcon As New Picture(12, 12)
-		  oIcon.Graphics.ForeColor = oColor
+		  oIcon.Graphics.DrawingColor = oColor
 		  oIcon.Graphics.FillOval(0, 0, 12, 12)
-		  oIcon.Graphics.ForeColor = &c000000
+		  oIcon.Graphics.DrawingColor = &c000000
 		  oIcon.Graphics.DrawOval(0, 0, 12, 12)
 		  pa.Add(oIcon)
 		  
 		  oIcon = New Picture(24, 24)
-		  oIcon.Graphics.ForeColor = oColor
+		  oIcon.Graphics.DrawingColor = oColor
 		  oIcon.Graphics.FillOval(0, 0, 24, 24)
-		  oIcon.Graphics.ForeColor = &c000000
+		  oIcon.Graphics.DrawingColor = &c000000
 		  oIcon.Graphics.DrawOval(0, 0, 24, 24)
 		  pa.Add(oIcon)
 		  
@@ -817,7 +823,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL(constWebsiteUrl)
+		    System.GotoURL(constWebsiteUrl)
 		  End If
 		End Sub
 	#tag EndEvent
@@ -846,13 +852,11 @@ End
 		Sub Paint(g As Graphics, areas() As Rect)
 		  #Pragma unused areas
 		  
-		  g.ForeColor = &cFFFFFF
-		  #If (XojoVersion >= 2018.03) Then
-		    If IsDarkMode Then g.ForeColor = &cD0D0D0
-		  #EndIf
-		  g.FillRect(0, 0, g.Width, g.Height)
-		  g.ForeColor = &c909090
-		  g.DrawRect(0, 0, g.Width, g.Height)
+		  g.DrawingColor = &cFFFFFF
+		  If Color.IsDarkMode Then g.DrawingColor = &cD0D0D0
+		  g.FillRectangle(0, 0, g.Width, g.Height)
+		  g.DrawingColor = &c909090
+		  g.DrawRectangle(0, 0, g.Width, g.Height)
 		  g.DrawPicture(PayPal, 3, 2, 100, 26, 0, 0, PayPal.Width, PayPal.Height)
 		End Sub
 	#tag EndEvent
@@ -870,7 +874,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL("https://paypal.me/jotools")
+		    System.GotoURL("https://paypal.me/jotools")
 		  End If
 		End Sub
 	#tag EndEvent
@@ -894,7 +898,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL(constWebsiteUrl)
+		    System.GotoURL(constWebsiteUrl)
 		  End If
 		End Sub
 	#tag EndEvent
@@ -953,7 +957,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL("mailto:xojo@jo-tools.ch")
+		    System.GotoURL("mailto:xojo@jo-tools.ch")
 		  End If
 		End Sub
 	#tag EndEvent

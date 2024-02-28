@@ -89,13 +89,13 @@ Class CTreeListedValues
 		Sub Delete(piPosition As Integer)
 		  If (piPosition < 0) Then Return
 		  
-		  easName.Remove(piPosition)
-		  easKey.Remove(piPosition)
-		  eaiStatus.Remove(piPosition)
-		  easHint.Remove(piPosition)
-		  eaoSubList.Remove(piPosition)
-		  eabExpanded.Remove(piPosition)
-		  eavData.Remove(piPosition)
+		  easName.RemoveAt(piPosition)
+		  easKey.RemoveAt(piPosition)
+		  eaiStatus.RemoveAt(piPosition)
+		  easHint.RemoveAt(piPosition)
+		  eaoSubList.RemoveAt(piPosition)
+		  eabExpanded.RemoveAt(piPosition)
+		  eavData.RemoveAt(piPosition)
 		  
 		End Sub
 	#tag EndMethod
@@ -172,7 +172,7 @@ Class CTreeListedValues
 
 	#tag Method, Flags = &h0
 		Function Last() As Integer
-		  Return UBound(easName)
+		  Return easName.LastIndex
 		  
 		End Function
 	#tag EndMethod
