@@ -1,16 +1,8 @@
 #tag Class
 Protected Class lstTreeView
-Inherits ListBox
+Inherits DesktopListBox
 	#tag Event
-		Function CellBackgroundPaint(g As Graphics, row As Integer, column As Integer) As Boolean
-		  #Pragma unused column
-		  
-		  Return Self.Draw_CellBackground(g, row)
-		End Function
-	#tag EndEvent
-
-	#tag Event
-		Function CellClick(row as Integer, column as Integer, x as Integer, y as Integer) As Boolean
+		Function CellPressed(row As Integer, column As Integer, x As Integer, y As Integer) As Boolean
 		  #Pragma unused x
 		  #Pragma unused y
 		  #Pragma unused column
@@ -23,106 +15,75 @@ Inherits ListBox
 	#tag EndEvent
 
 	#tag Event
-		Function CellTextPaint(g As Graphics, row As Integer, column As Integer, x as Integer, y as Integer) As Boolean
-		  Return Self.Draw_CellText(g, row, column, x, y)
-		  
-		End Function
-	#tag EndEvent
-
-	#tag Event
-		Sub Change()
-		  Dim row As Integer = Me.ListIndex
-		  
-		  If (row < Me.ListCount) And (row >= 0) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
-		    OnChange(CTreeItem(Me.RowTag(row)).TreeMain, CTreeItem(Me.RowTag(row)).PosItem)
-		  End If
-		End Sub
-	#tag EndEvent
-
-	#tag Event
-		Sub CollapseRow(row As Integer)
-		  If (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
-		    
-		    CTreeItem(Me.RowTag(row)).Expanded = False
-		    
-		    Dim oTree As CTreeListedValues = CTreeItem(Me.RowTag(row)).TreeMain
-		    If (oTree = Nil) Or (CTreeItem(Me.RowTag(row)).PosItem < 0) Then Return
-		    oTree.Expanded(CTreeItem(Me.RowTag(row)).PosItem) = False
-		    
-		  End If
-		End Sub
-	#tag EndEvent
-
-	#tag Event
-		Function ConstructContextualMenu(base as MenuItem, x as Integer, y as Integer) As Boolean
+		Function ConstructContextualMenu(base As DesktopMenuItem, x As Integer, y As Integer) As Boolean
 		  'select appropriate row
 		  eiRowMousePos = Me.RowFromXY(x, y)
 		  If (eiRowMousePos >= 0) Then
-		    Me.ListIndex = eiRowMousePos
+		    Me.SelectedRowIndex = eiRowMousePos
 		  End If
 		  
 		  'only show menu if entries are available
-		  If (oTreeStructure <> Nil) And (oTreeStructure.Count > 0) And (Me.ListCount > 0) Then
+		  If (oTreeStructure <> Nil) And (oTreeStructure.Count > 0) And (Me.RowCount > 0) Then
 		    'if clicked on a choice: possible sub-menu
-		    Dim bItemIsSelected As Boolean = False
-		    Dim bItemIsSelectedAndHasNoSubtree As Boolean = False
-		    Dim bItemIsExpanded As Boolean = False
-		    If (eiRowMousePos >= 0) And (Me.ListIndex >= 0) And (Me.RowTag(Me.ListIndex) <> Nil) And (Me.RowTag(Me.ListIndex) IsA CTreeItem) Then
+		    Var bItemIsSelected As Boolean = False
+		    Var bItemIsSelectedAndHasNoSubtree As Boolean = False
+		    Var bItemIsExpanded As Boolean = False
+		    If (eiRowMousePos >= 0) And (Me.SelectedRowIndex >= 0) And (Me.RowTag(Me.SelectedRowIndex) <> Nil) And (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then
 		      bItemIsSelected = True
-		      bItemIsSelectedAndHasNoSubtree = (CTreeItem(Me.RowTag(Me.ListIndex)).TreeSub = Nil)
-		      bItemIsExpanded = CTreeItem(Me.RowTag(Me.ListIndex)).Expanded
-		      Dim oChangeMenu As MenuItem = OnRequestStatusChangeMenu(CTreeItem(Me.RowTag(Me.ListIndex)).TreeMain, CTreeItem(Me.RowTag(Me.ListIndex)).PosItem, CTreeItem(Me.RowTag(Me.ListIndex)).Status, CTreeItem(Me.RowTag(Me.ListIndex)).Data)
+		      bItemIsSelectedAndHasNoSubtree = (CTreeItem(Me.RowTag(Me.SelectedRowIndex)).TreeSub = Nil)
+		      bItemIsExpanded = CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Expanded
+		      Var oChangeMenu As DesktopMenuItem = OnRequestStatusChangeMenu(CTreeItem(Me.RowTag(Me.SelectedRowIndex)).TreeMain, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).PosItem, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Status, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Data)
 		      If (oChangeMenu <> Nil) And (oChangeMenu.Count > 0) Then
-		        Dim iPos As Integer
+		        Var iPos As Integer
 		        For iPos = 0 To oChangeMenu.Count - 1
 		          //Linux und Cocoa: via MenuItem.Clone
 		          #If TargetMacOS Or TargetLinux  Then
-		            base.Append(oChangeMenu.Item(iPos).Clone)
+		            base.AddMenu(oChangeMenu.MenuAt(iPos).Clone)
 		          #Else
-		            base.Append(oChangeMenu.Item(iPos))
+		            base.AddMenu(oChangeMenu.MenuAt(iPos))
 		          #EndIf
 		        Next
 		        
-		        Dim oSeparator As New MenuItem
+		        Var oSeparator As New DesktopMenuItem
 		        oSeparator.Name = "mnuSeparator"
 		        oSeparator.Text = "-"
-		        base.Append(oSeparator)
+		        base.AddMenu(oSeparator)
 		      End If
 		    End If
 		    
 		    'Default Menu Entries
 		    If bItemIsSelected And (Not bItemIsSelectedAndHasNoSubtree) Then
-		      Dim oExpandItem As New MenuItem
+		      Var oExpandItem As New DesktopMenuItem
 		      oExpandItem.Text = Me.constCaption_ExpandItem
 		      oExpandItem.Name = "mnuExpandItem"
 		      oExpandItem.Enabled = (Not bItemIsExpanded)
-		      base.Append(oExpandItem)
+		      base.AddMenu(oExpandItem)
 		      
-		      Dim oCollapseItem As New MenuItem
+		      Var oCollapseItem As New DesktopMenuItem
 		      oCollapseItem.Text = Me.constCaption_CollapseItem
 		      oCollapseItem.Name = "mnuCollapseItem"
 		      oCollapseItem.Enabled = bItemIsExpanded
-		      base.Append(oCollapseItem)
+		      base.AddMenu(oCollapseItem)
 		      
-		      Dim oSeparatorItem As New MenuItem
+		      Var oSeparatorItem As New DesktopMenuItem
 		      oSeparatorItem.Name = "mnuSeparatorItem"
 		      oSeparatorItem.Text = "-"
-		      base.Append(oSeparatorItem)
+		      base.AddMenu(oSeparatorItem)
 		    End If
 		    
 		    For i As Integer = 0 To oTreeStructure.Last
 		      If (oTreeStructure.SubList(i) = Nil) Then Continue
 		      
 		      'at least 1 Sub-Liste available
-		      Dim oExpandAll As New MenuItem
+		      Var oExpandAll As New DesktopMenuItem
 		      oExpandAll.Text = Me.constCaption_ExpandAll
 		      oExpandAll.Name = "mnuExpandAll"
-		      base.Append(oExpandAll)
+		      base.AddMenu(oExpandAll)
 		      
-		      Dim oCollapseAll As New MenuItem
+		      Var oCollapseAll As New DesktopMenuItem
 		      oCollapseAll.Text = Me.constCaption_CollapseAll
 		      oCollapseAll.Name = "mnuCollapseAll"
-		      base.Append(oCollapseAll)
+		      base.AddMenu(oCollapseAll)
 		      
 		      Exit
 		    Next
@@ -135,19 +96,19 @@ Inherits ListBox
 	#tag EndEvent
 
 	#tag Event
-		Function ContextualMenuAction(hitItem as MenuItem) As Boolean
-		  If (hitItem <> Nil) Then
-		    Dim iExpandRow As Integer = -1
-		    Dim sCurrentKey As String
-		    If (eiRowMousePos >= 0) And (Me.ListIndex >= 0) And (eiRowMousePos = Me.ListIndex) Then
+		Function ContextualMenuItemSelected(selectedItem As DesktopMenuItem) As Boolean
+		  If (selectedItem <> Nil) Then
+		    Var iExpandRow As Integer = -1
+		    Var sCurrentKey As String
+		    If (eiRowMousePos >= 0) And (Me.SelectedRowIndex >= 0) And (eiRowMousePos = Me.SelectedRowIndex) Then
 		      iExpandRow = eiRowMousePos
 		    End If
 		    
-		    If (Me.ListIndex >= 0) And (Me.RowTag(Me.ListIndex) <> Nil) And (Me.RowTag(Me.ListIndex) IsA CTreeItem) Then
-		      sCurrentKey = CTreeItem(Me.RowTag(Me.ListIndex)).Key
+		    If (Me.SelectedRowIndex >= 0) And (Me.RowTag(Me.SelectedRowIndex) <> Nil) And (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then
+		      sCurrentKey = CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Key
 		    End If
 		    
-		    Select Case hitItem.Name
+		    Select Case selectedItem.Name
 		    Case "mnuExpandAll"
 		      Self.ExpandCollapseAll(-1, True)
 		      If (sCurrentKey <> "") Then Self.Sel_Key_InCurrentView = sCurrentKey
@@ -161,8 +122,8 @@ Inherits ListBox
 		      Self.ExpandCollapseAll(iExpandRow, False)
 		      If (sCurrentKey <> "") Then Self.Sel_Key_InCurrentView = sCurrentKey
 		    Else
-		      Dim sKey As String = OnRequestStatusChangeMenuActionKey(hitItem.Name)
-		      If Self.Do_KeyDown(sKey, Me.ListIndex) Then
+		      Var sKey As String = OnRequestStatusChangeMenuActionKey(selectedItem.Name)
+		      If Self.Do_KeyDown(sKey, Me.SelectedRowIndex) Then
 		      End If
 		    End Select
 		    
@@ -174,19 +135,19 @@ Inherits ListBox
 	#tag EndEvent
 
 	#tag Event
-		Sub DoubleClick()
+		Sub DoublePressed()
 		  If OnDoubleClick Then Return
 		  
-		  If (Me.ListIndex >= 0) And (Me.RowTag(Me.ListIndex) <> Nil) And (Me.RowTag(Me.ListIndex) IsA CTreeItem) Then
-		    Self.Data_RequestChange(Me.ListIndex, CTreeItem(Me.RowTag(Me.ListIndex)).TreeMain, CTreeItem(Me.RowTag(Me.ListIndex)).PosItem, CTreeItem(Me.RowTag(Me.ListIndex)).Status, "", CTreeItem(Me.RowTag(Me.ListIndex)).Data)
+		  If (Me.SelectedRowIndex >= 0) And (Me.RowTag(Me.SelectedRowIndex) <> Nil) And (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then
+		    Self.Data_RequestChange(Me.SelectedRowIndex, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).TreeMain, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).PosItem, CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Status, "", CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Data)
 		  End If
 		End Sub
 	#tag EndEvent
 
 	#tag Event
-		Function DragOver(x As Integer, y As Integer, obj As DragItem, action As Integer) As Boolean
-		  Dim row As Integer = Me.RowFromXY(x, y)
-		  If (row < Me.ListCount) And (row >= 0) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
+		Function DragOver(x As Integer, y As Integer, obj As DragItem, action As DragItem.Types) As Boolean
+		  Var row As Integer = Me.RowFromXY(x, y)
+		  If (row < Me.RowCount) And (row >= 0) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
 		    Return OnDragOver(CTreeItem(Me.RowTag(row)).TreeMain, CTreeItem(Me.RowTag(row)).PosItem, obj, action)
 		  End If
 		  
@@ -201,7 +162,7 @@ Inherits ListBox
 		  
 		  If (eoDragTreeItem = Nil) Or (eiDragTreePos < 0) Then Return False
 		  
-		  If (newPosition < Me.ListCount) And (newPosition >= 0) And (Me.RowTag(newPosition) <> Nil) And (Me.RowTag(newPosition) IsA CTreeItem) Then
+		  If (newPosition < Me.RowCount) And (newPosition >= 0) And (Me.RowTag(newPosition) <> Nil) And (Me.RowTag(newPosition) IsA CTreeItem) Then
 		    Return OnDragReorderRow(CTreeItem(Me.RowTag(newPosition)).TreeMain, CTreeItem(Me.RowTag(newPosition)).PosItem, eoDragTreeItem, eiDragTreePos)
 		  End If
 		  
@@ -213,7 +174,7 @@ Inherits ListBox
 		Function DragRow(drag As DragItem, row As Integer) As Boolean
 		  eoDragTreeItem = Nil
 		  eiDragTreePos = -1
-		  If (row < Me.ListCount) And (row >= 0) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
+		  If (row < Me.RowCount) And (row >= 0) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
 		    'trigger Event OnChance manually
 		    OnChange(CTreeItem(Me.RowTag(row)).TreeMain, CTreeItem(Me.RowTag(row)).PosItem)
 		    If OnDragRow(CTreeItem(Me.RowTag(row)).TreeMain, CTreeItem(Me.RowTag(row)).PosItem, drag) Then
@@ -230,12 +191,60 @@ Inherits ListBox
 	#tag EndEvent
 
 	#tag Event
-		Sub ExpandRow(row As Integer)
+		Function KeyDown(key As String) As Boolean
+		  Var iRow As Integer = Me.SelectedRowIndex
+		  
+		  If Do_KeyDown(Key, iRow) Then Return True
+		  
+		  If OnKeyDown(Key) Then Return True
+		  
+		End Function
+	#tag EndEvent
+
+	#tag Event
+		Sub Opening()
+		  Me.AllowExpandableRows = True
+		  
+		  Self.Init_Columns
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Function PaintCellBackground(g As Graphics, row As Integer, column As Integer) As Boolean
+		  #Pragma unused column
+		  
+		  Return Self.Draw_CellBackground(g, row)
+		End Function
+	#tag EndEvent
+
+	#tag Event
+		Function PaintCellText(g as Graphics, row as Integer, column as Integer, x as Integer, y as Integer) As Boolean
+		  Return Self.Draw_CellText(g, row, column, x, y)
+		  
+		End Function
+	#tag EndEvent
+
+	#tag Event
+		Sub RowCollapsed(row As Integer)
+		  If (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
+		    
+		    CTreeItem(Me.RowTag(row)).Expanded = False
+		    
+		    Var oTree As CTreeListedValues = CTreeItem(Me.RowTag(row)).TreeMain
+		    If (oTree = Nil) Or (CTreeItem(Me.RowTag(row)).PosItem < 0) Then Return
+		    oTree.Expanded(CTreeItem(Me.RowTag(row)).PosItem) = False
+		    
+		  End If
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub RowExpanded(row As Integer)
 		  If (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
 		    
 		    CTreeItem(Me.RowTag(row)).Expanded = True
 		    
-		    Dim oTree As CTreeListedValues = CTreeItem(Me.RowTag(row)).TreeMain
+		    Var oTree As CTreeListedValues = CTreeItem(Me.RowTag(row)).TreeMain
 		    If (oTree = Nil) Or (CTreeItem(Me.RowTag(row)).PosItem < 0) Then Return
 		    oTree.Expanded(CTreeItem(Me.RowTag(row)).PosItem) = True
 		    oTree = CTreeItem(Me.RowTag(row)).TreeSub
@@ -252,21 +261,12 @@ Inherits ListBox
 	#tag EndEvent
 
 	#tag Event
-		Function KeyDown(Key As String) As Boolean
-		  Dim iRow As Integer = Me.ListIndex
+		Sub SelectionChanged()
+		  Var row As Integer = Me.SelectedRowIndex
 		  
-		  If Do_KeyDown(Key, iRow) Then Return True
-		  
-		  If OnKeyDown(Key) Then Return True
-		  
-		End Function
-	#tag EndEvent
-
-	#tag Event
-		Sub Open()
-		  Me.Hierarchical = True
-		  
-		  Self.Init_Columns
+		  If (row < Me.RowCount) And (row >= 0) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
+		    OnChange(CTreeItem(Me.RowTag(row)).TreeMain, CTreeItem(Me.RowTag(row)).PosItem)
+		  End If
 		End Sub
 	#tag EndEvent
 
@@ -297,7 +297,7 @@ Inherits ListBox
 		    Me.oTreeStructure = Nil
 		  End If
 		  
-		  Me.DeleteAllRows
+		  Me.RemoveAllRows
 		  
 		End Sub
 	#tag EndMethod
@@ -329,9 +329,9 @@ Inherits ListBox
 		Function Data_PosOfKey(psKey As String) As Integer
 		  If (psKey = "") Then Return -1
 		  
-		  If (Me.ListCount < 1) Then Return -1
+		  If (Me.RowCount < 1) Then Return -1
 		  
-		  For i As Integer = (Me.ListCount - 1) DownTo 0
+		  For i As Integer = (Me.RowCount - 1) DownTo 0
 		    If (Not (Me.RowTag(i) IsA CTreeItem)) Then Continue
 		    If (CTreeItem(Me.RowTag(i)).Key = psKey) Then
 		      Return i
@@ -350,9 +350,9 @@ Inherits ListBox
 		  '
 		  '============================================================
 		  
-		  If (poTree = Nil) Or (Me.ListCount < 1) Then Return
+		  If (poTree = Nil) Or (Me.RowCount < 1) Then Return
 		  
-		  Dim vKey As Variant = poTree.Key(piPos)
+		  Var vKey As Variant = poTree.Key(piPos)
 		  
 		  If (piRow >= 0) Then
 		    'update given row
@@ -363,7 +363,7 @@ Inherits ListBox
 		  End If
 		  
 		  'otherwise: search entry
-		  For iRowPos As Integer = 0 To Me.ListCount - 1
+		  For iRowPos As Integer = 0 To Me.RowCount - 1
 		    If (Me.RowTag(iRowPos) <> Nil) And (Me.RowTag(iRowPos) IsA CTreeItem) And (CTreeItem(Me.RowTag(iRowPos)).Key = vKey) Then
 		      Me.Data_Show_Entry(poTree, piPos, CTreeItem(Me.RowTag(iRowPos)).Level, CTreeItem(Me.RowTag(iRowPos)).ParentName, CTreeItem(Me.RowTag(iRowPos)).PosParent, irowPos)
 		    End If
@@ -380,7 +380,7 @@ Inherits ListBox
 		  '
 		  '============================================================
 		  
-		  Dim bNeedRefresh As Boolean = True
+		  Var bNeedRefresh As Boolean = True
 		  OnRequestStatusChange(poTreeList, piPos, bNeedRefresh, piCurrentStatus, psKeyPressed, pvData)
 		  
 		  If bNeedRefresh Then
@@ -400,9 +400,9 @@ Inherits ListBox
 		  '============================================================
 		  
 		  If (poTree = Nil) Or (piPos < 0) Then Return
-		  If (piUpdateRow >= 0) And (Me.ListCount <= piUpdateRow) Then Return
+		  If (piUpdateRow >= 0) And (Me.RowCount <= piUpdateRow) Then Return
 		  
-		  Dim oTreeItem As New CTreeItem
+		  Var oTreeItem As New CTreeItem
 		  oTreeItem.TreeMain = poTree
 		  oTreeItem.PosItem = piPos
 		  
@@ -422,25 +422,25 @@ Inherits ListBox
 		  If (piUpdateRow < 0) Then
 		    If (poTree.SubList(piPos) <> Nil) Then
 		      'Neuer Level
-		      Me.AddFolder ""
-		      piUpdateRow = Me.LastIndex
+		      Me.AddExpandableRow ""
+		      piUpdateRow = Me.LastAddedRowIndex
 		    Else
 		      'Neue Zeile
 		      Me.AddRow ""
-		      piUpdateRow = Me.LastIndex
+		      piUpdateRow = Me.LastAddedRowIndex
 		    End If
 		  End If
 		  
 		  If (eaoStatusPictures <> Nil) And eaoStatusPictures.HasKey(oTreeItem.Status) Then
-		    Me.RowPicture(piUpdateRow) = eaoStatusPictures.Lookup(oTreeItem.Status, Nil)
+		    Me.RowImageAt(piUpdateRow) = eaoStatusPictures.Lookup(oTreeItem.Status, Nil)
 		  Else
-		    Me.RowPicture(piUpdateRow) = Nil
+		    Me.RowImageAt(piUpdateRow) = Nil
 		  End If
 		  
-		  Me.Cell(piUpdateRow, constCol_Caption) = oTreeItem.Caption
-		  Me.Cell(piUpdateRow, constCol_Hint) = oTreeItem.Hint
+		  Me.CellTextAt(piUpdateRow, constCol_Caption) = oTreeItem.Caption
+		  Me.CellTextAt(piUpdateRow, constCol_Hint) = oTreeItem.Hint
 		  Me.RowTag(piUpdateRow) = oTreeItem
-		  Me.Expanded(piUpdateRow) = oTreeItem.Expanded
+		  Me.RowExpandedAt(piUpdateRow) = oTreeItem.Expanded
 		  
 		  
 		End Sub
@@ -491,7 +491,7 @@ Inherits ListBox
 		Sub Data_StatusTextStyle(pdictTextStyles As Dictionary)
 		  '============================================================
 		  '
-		  ' Text-Format für Status
+		  ' Text-Format for Status
 		  '
 		  '============================================================
 		  
@@ -547,20 +547,20 @@ Inherits ListBox
 		  If (Key = "") Then Return True
 		  
 		  If (iRow >= 0) And (Me.RowTag(iRow) <> Nil) And (Me.RowTag(iRow) IsA CTreeItem) Then
-		    Dim bChangeStatus As Boolean = False
+		    Var bChangeStatus As Boolean = False
 		    
 		    'Left
-		    If (AscB(Key) = 28) Then
+		    If (Key.AscByte = 28) Then
 		      If (CTreeItem(Me.RowTag(iRow)).TreeSub <> Nil) Then
-		        Me.Expanded(iRow) = False
+		        Me.RowExpandedAt(iRow) = False
 		        Return True
 		      End If
 		    End If
 		    
 		    'Right
-		    If (AscB(Key) = 29) Then
+		    If (Key.AscByte = 29) Then
 		      If (CTreeItem(Me.RowTag(iRow)).TreeSub <> Nil) Then
-		        Me.Expanded(iRow) = True
+		        Me.RowExpandedAt(iRow) = True
 		        Return True
 		      End If
 		    End If
@@ -570,18 +570,9 @@ Inherits ListBox
 		      bChangeStatus = True
 		    End If
 		    
-		    
-		    'Expand/Collapse
-		    'if (Key = " ") then
-		    'if (CTreeItem(me.RowTag(iRow)).TreeSub <> nil) then
-		    'Me.Expanded(iRow) = (not Me.Expanded(iRow))
-		    'return true
-		    'end if
-		    'end if
-		    
-		    
 		    'A-Z, 0-9
-		    If (Not bChangeStatus) And (InStr("abcdefghijklmnopqrstuvwxyz01234567890 ", Key) > 0) Then
+		    Var chars As String = "abcdefghijklmnopqrstuvwxyz01234567890 "
+		    If (Not bChangeStatus) And (chars.IndexOf(Key) > 0) Then
 		      bChangeStatus = True
 		    End If
 		    
@@ -605,10 +596,10 @@ Inherits ListBox
 		  '============================================================
 		  
 		  ' No List Entry
-		  If (row >= Me.ListCount) Then Return False
+		  If (row >= Me.RowCount) Then Return False
 		  
 		  ' Selection
-		  If (row = Me.ListIndex) Then
+		  If (row = Me.SelectedRowIndex) Then
 		    #If TargetMacOS Then
 		      'Let Xojo draw the default Selection Background
 		      Return False
@@ -616,23 +607,23 @@ Inherits ListBox
 		      'At least on Windows, Xojo doesn't draw the whole row with a background selection
 		      'so we do that here ourselves. Should be improved with Declares to get the correct
 		      'colors for the state 'window is not active'...
-		      g.foreColor = If(Self.Active, HighlightColor, If(IsDarkMode, &c242424, &cC9C5BB))
-		      g.FillRect(0, 0, g.width, g.height)
+		      g.DrawingColor = If(Self.Active, Color.HighlightColor, If(Color.IsDarkMode, &c242424, &cC9C5BB))
+		      g.FillRectangle(0, 0, g.width, g.height)
 		      Return True
 		    #EndIf
 		  End If
 		  
 		  If (Me.Enabled = False) Then
-		    g.foreColor = FillColor
-		    g.FillRect(0, 0, g.width, g.height)
+		    g.DrawingColor = Color.FillColor
+		    g.FillRectangle(0, 0, g.width, g.height)
 		    Return True
 		  End If
 		  
-		  If (row < Me.ListCount) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
+		  If (row < Me.RowCount) And (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
 		    If (eacColorsBackground <> Nil) And eacColorsBackground.HasKey(CTreeItem(Me.RowTag(row)).Status) Then
 		      If eacColors.HasKey(CTreeItem(Me.RowTag(row)).Status) Then
-		        g.ForeColor = eacColorsBackground.Value(CTreeItem(Me.RowTag(row)).Status)
-		        g.FillRect(0, 0, g.width, g.height)
+		        g.DrawingColor = eacColorsBackground.Value(CTreeItem(Me.RowTag(row)).Status)
+		        g.FillRectangle(0, 0, g.width, g.height)
 		      End If
 		      Return True
 		    End If
@@ -652,7 +643,7 @@ Inherits ListBox
 		  '============================================================
 		  
 		  ' No List Entry
-		  If (row >= Me.ListCount) Then Return False
+		  If (row >= Me.RowCount) Then Return False
 		  
 		  If (Me.RowTag(row) <> Nil) And (Me.RowTag(row) IsA CTreeItem) Then
 		    g.Bold = False
@@ -671,32 +662,32 @@ Inherits ListBox
 		    End If
 		    
 		    ' Selection
-		    If (row = Me.ListIndex) And (Me.Enabled) Then
-		      g.ForeColor = &cFFFFFF
+		    If (row = Me.SelectedRowIndex) And (Me.Enabled) Then
+		      g.DrawingColor = &cFFFFFF
 		    Else
 		      If (eacColors <> Nil) And eacColors.HasKey(CTreeItem(Me.RowTag(row)).Status) Then
-		        g.ForeColor = eacColors.Lookup(CTreeItem(Me.RowTag(row)).Status, TextColor)
+		        g.DrawingColor = eacColors.Lookup(CTreeItem(Me.RowTag(row)).Status, Color.TextColor)
 		      Else
-		        g.ForeColor = TextColor
+		        g.DrawingColor = Color.TextColor
 		      End If
 		    End If
 		    
 		    If (ebTextColorOnlyForHint And (column <> Me.constCol_Hint)) Then
 		      ' Selection
-		      If (row = Me.ListIndex) And (Me.Enabled) Then
-		        g.ForeColor = &cffffff
+		      If (row = Me.SelectedRowIndex) And (Me.Enabled) Then
+		        g.DrawingColor = &cffffff
 		      Else
-		        g.ForeColor = TextColor
+		        g.DrawingColor = Color.TextColor
 		      End If
 		    End If
 		    
 		    
-		    Dim iOffset As Integer = x
-		    If (column = Me.constCol_Caption) And (Me.RowPicture(row) <> Nil) Then
+		    Var iOffset As Integer = x
+		    If (column = Me.constCol_Caption) And (Me.RowImageAt(row) <> Nil) Then
 		      iOffset = iOffset + eiOffsetXIcon 'Offset Icon - Text
 		    End If
-		    Dim sText As String = ReplaceLineEndings(Me.Cell(row, column), " ")
-		    g.DrawString(sText, iOffset, y, g.Width, True)
+		    Var sText As String = Me.CellTextAt(row, column).ReplaceLineEndings(" ")
+		    g.DrawText(sText, iOffset, y, g.Width, True)
 		    Return True
 		    
 		  End If
@@ -716,8 +707,8 @@ Inherits ListBox
 		  If (oTreeStructure = Nil) Then Return
 		  If (oTreeStructure.Count < 0) Then Return
 		  
-		  Dim oExpandTree As CTreeListedValues = oTreeStructure
-		  If (piRow >= 0) And (piRow <= (Me.ListCount - 1)) Then
+		  Var oExpandTree As CTreeListedValues = oTreeStructure
+		  If (piRow >= 0) And (piRow <= (Me.RowCount - 1)) Then
 		    If (Me.RowTag(piRow) <> Nil) And (Me.RowTag(piRow) IsA CTreeItem) Then
 		      'expand this entry
 		      oExpandTree = CTreeItem(Me.RowTag(piRow)).TreeMain
@@ -759,15 +750,14 @@ Inherits ListBox
 
 	#tag Method, Flags = &h0
 		Function GetCollapsedKeys() As String()
+		  Var aKeys() As String
+		  If (Me.RowCount < 1) Then Return aKeys
 		  
-		  Dim aKeys() As String
-		  If (Me.ListCount < 1) Then Return aKeys
-		  
-		  For i As Integer = (Me.ListCount - 1) DownTo 0
+		  For i As Integer = (Me.RowCount - 1) DownTo 0
 		    
 		    If (Not (Me.RowTag(i) IsA CTreeItem)) Then Continue
 		    If (Not CTreeItem(Me.RowTag(i)).Expanded) And (CTreeItem(Me.RowTag(i)).TreeSub <> Nil) Then
-		      aKeys.Append(CTreeItem(Me.RowTag(i)).Key)
+		      aKeys.Add(CTreeItem(Me.RowTag(i)).Key)
 		    End If
 		    
 		  Next
@@ -795,15 +785,15 @@ Inherits ListBox
 		    Me.ColumnWidths = "100%, 0, 0"
 		  End If
 		  
-		  Me.ColumnType(constCol_Caption) = Listbox.TypeNormal
-		  If ebShowHints Then Me.ColumnType(constCol_Hint) = Listbox.TypeNormal
-		  Me.ColumnType(constCol_Key) = Listbox.TypeNormal
+		  Me.ColumnTypeAt(constCol_Caption) = DesktopListbox.CellTypes.Normal
+		  If ebShowHints Then Me.ColumnTypeAt(constCol_Hint) = DesktopListbox.CellTypes.Normal
+		  Me.ColumnTypeAt(constCol_Key) = DesktopListbox.CellTypes.Normal
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function KeyDown_IsEnter(poControl As RectControl, psKey As String) As Boolean
+		Private Function KeyDown_IsEnter(poControl As DesktopUIControl, psKey As String) As Boolean
 		  '============================================================
 		  '
 		  ' Enter or Return pressed
@@ -813,7 +803,7 @@ Inherits ListBox
 		  
 		  #If TargetMacOS Then
 		    
-		    If ((AscB(psKey) = 13) Or (AscB(psKey) = 3)) Then
+		    If (psKey.AscByte = 13) Or (psKey.AscByte = 3) Then
 		      Return True
 		    End If
 		    
@@ -830,18 +820,18 @@ Inherits ListBox
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Function RowTag(piRow As Integer) As Variant
+	#tag Method, Flags = &h21
+		Private Function RowTag(piRow As Integer) As Variant
 		  '============================================================
 		  '
 		  ' RowTag (TreeItem)
 		  '
 		  '============================================================
 		  
-		  If (Me.ListCount < (piRow + 1)) Then Return Nil
+		  If (Me.RowCount < (piRow + 1)) Then Return Nil
 		  
-		  If (Me.CellTag(piRow, constCol_Key) <> Nil) And (Me.CellTag(piRow, constCol_Key) IsA CTreeItem) Then
-		    Return Me.CellTag(piRow, constCol_Key)
+		  If (Me.CellTagAt(piRow, constCol_Key) <> Nil) And (Me.CellTagAt(piRow, constCol_Key) IsA CTreeItem) Then
+		    Return Me.CellTagAt(piRow, constCol_Key)
 		  Else
 		    Return Nil
 		  End If
@@ -849,26 +839,25 @@ Inherits ListBox
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Sub RowTag(piRow As Integer, Assigns poTreeItem As CTreeItem)
+	#tag Method, Flags = &h21
+		Private Sub RowTag(piRow As Integer, Assigns poTreeItem As CTreeItem)
 		  '============================================================
 		  '
 		  ' RowTag (TreeItem)
 		  '
 		  '============================================================
 		  
-		  Me.CellTag(piRow, constCol_Key) = poTreeItem
+		  Me.CellTagAt(piRow, constCol_Key) = poTreeItem
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Sel_Key() As String
+		  If (Me.SelectedRowIndex = -1) Then Return ""
+		  If Not (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then Return ""
 		  
-		  If (Me.ListIndex = -1) Then Return ""
-		  If Not (Me.RowTag(Me.ListIndex) IsA CTreeItem) Then Return ""
-		  
-		  Return CTreeItem(Me.RowTag(Me.ListIndex)).Key
+		  Return CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Key
 		  
 		  
 		End Function
@@ -878,20 +867,19 @@ Inherits ListBox
 		Sub Sel_Key_InCurrentView(Assigns psTryToSelKey As String)
 		  If (psTryToSelKey = "") Then Return
 		  
-		  Dim iPos As Integer
+		  Var iPos As Integer
 		  iPos = Data_PosOfKey(psTryToSelKey)
-		  If (iPos >= 0) Then Me.ListIndex = iPos
+		  If (iPos >= 0) Then Me.SelectedRowIndex = iPos
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function Sel_Status() As Integer
+		  If (Me.SelectedRowIndex = -1) Then Return -1
+		  If Not (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then Return -1
 		  
-		  If (Me.ListIndex = -1) Then Return -1
-		  If Not (Me.RowTag(Me.ListIndex) IsA CTreeItem) Then Return -1
-		  
-		  Return CTreeItem(Me.RowTag(Me.ListIndex)).Status
+		  Return CTreeItem(Me.RowTag(Me.SelectedRowIndex)).Status
 		  
 		  
 		End Function
@@ -899,12 +887,12 @@ Inherits ListBox
 
 	#tag Method, Flags = &h0
 		Sub Sel_TreeList(ByRef poTreeList As CTreeListedValues, ByRef piPos As Integer)
-		  If (Me.ListIndex = -1) Then Return
-		  If (Me.ListIndex > Me.ListCount - 1) Then Return
-		  If Not (Me.RowTag(Me.ListIndex) IsA CTreeItem) Then Return
+		  If (Me.SelectedRowIndex = -1) Then Return
+		  If (Me.SelectedRowIndex > Me.RowCount - 1) Then Return
+		  If Not (Me.RowTag(Me.SelectedRowIndex) IsA CTreeItem) Then Return
 		  
-		  poTreeList = CTreeItem(Me.RowTag(Me.ListIndex)).TreeMain
-		  piPos = CTreeItem(Me.RowTag(Me.ListIndex)).PosItem
+		  poTreeList = CTreeItem(Me.RowTag(Me.SelectedRowIndex)).TreeMain
+		  piPos = CTreeItem(Me.RowTag(Me.SelectedRowIndex)).PosItem
 		  
 		  
 		  
@@ -925,7 +913,7 @@ Inherits ListBox
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event OnDragOver(poTreeList As CTreeListedValues, piPos As Integer, drag As DragItem, dragAction As Integer) As Boolean
+		Event OnDragOver(poTreeList As CTreeListedValues, piPos As Integer, drag As DragItem, dragAction As DragItem.Types) As Boolean
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -949,7 +937,7 @@ Inherits ListBox
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event OnRequestStatusChangeMenu(poTreeList As CTreeListedValues, piPos As Integer, piStatus As Integer = -1, pvData As Variant) As MenuItem
+		Event OnRequestStatusChangeMenu(poTreeList As CTreeListedValues, piPos As Integer, piStatus As Integer = -1, pvData As Variant) As DesktopMenuItem
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -958,28 +946,28 @@ Inherits ListBox
 
 
 	#tag Note, Name = Example
-		Dim oSubSubTree As New CTreeListedValues
-		oSubSubTree.Append("Entry 2.3.1", "Hint 2.3.1", "E231", 1, false, nil)
-		oSubSubTree.Append("Entry 2.3.2", "Hint 2.3.2", "E232", 1, false, nil)
+		Var oSubSubTree As New CTreeListedValues
+		oSubSubTree.Add("Entry 2.3.1", "Hint 2.3.1", "E231", 1, false, nil)
+		oSubSubTree.Add("Entry 2.3.2", "Hint 2.3.2", "E232", 1, false, nil)
 		
-		Dim oSubTree As New CTreeListedValues
-		oSubTree.Append("Entry 2.1", "Hint 2.1", "E21", 1, false, nil)
-		oSubTree.Append("Entry 2.2", "Hint 2.2", "E22", 2, false, nil)
-		oSubTree.Append("Entry 2.3", "Hint 2.3", "E23", 2, false, oSubSubTree)
-		oSubTree.Append("Entry 2.4", "Hint 2.4", "E24", 1, false, nil)
-		oSubTree.Append("Entry 2.5", "Hint 2.5", "E25", 1, false, nil)
+		Var oSubTree As New CTreeListedValues
+		oSubTree.Add("Entry 2.1", "Hint 2.1", "E21", 1, false, nil)
+		oSubTree.Add("Entry 2.2", "Hint 2.2", "E22", 2, false, nil)
+		oSubTree.Add("Entry 2.3", "Hint 2.3", "E23", 2, false, oSubSubTree)
+		oSubTree.Add("Entry 2.4", "Hint 2.4", "E24", 1, false, nil)
+		oSubTree.Add("Entry 2.5", "Hint 2.5", "E25", 1, false, nil)
 		
 		'This is our final example hierarchical list, which will be represented in the TreeView
 		'(Entry 2 has a sub-tree, 1 and 3 don't)
 		
-		Dim oTree As New CTreeListedValues
-		oTree.Append("Entry 1.0", "Hint 1.0", "E10", 2, false, nil)
-		oTree.Append("Entry 2.0", "Hint 2.0", "E20", 2, true, oSubTree)
-		oTree.Append("Entry 3.0", "Hint 3.0", "E30", 2, false, nil)
+		Var oTree As New CTreeListedValues
+		oTree.Add("Entry 1.0", "Hint 1.0", "E10", 2, false, nil)
+		oTree.Add("Entry 2.0", "Hint 2.0", "E20", 2, true, oSubTree)
+		oTree.Add("Entry 3.0", "Hint 3.0", "E30", 2, false, nil)
 		
 		
 		'Define Icons for Status 1, 2
-		Dim dictIcons As New Dictionary
+		Var dictIcons As New Dictionary
 		dictIcons.Value(1) = iconOne
 		dictIcons.Value(2) = iconTwo
 		lstTree.Data_StatusIcons(dictIcons)
@@ -1079,307 +1067,101 @@ Inherits ListBox
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="Transparent"
+			Name="GridLineStyle"
+			Visible=true
+			Group="Appearance"
+			InitialValue="0"
+			Type="GridLineStyles"
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - None"
+				"1 - Horizontal"
+				"2 - Vertical"
+				"3 - Both"
+			#tag EndEnumValues
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowAutoDeactivate"
+			Visible=true
+			Group="Appearance"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="HasBorder"
+			Visible=true
+			Group="Appearance"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="HasHeader"
 			Visible=true
 			Group="Appearance"
 			InitialValue="False"
 			Type="Boolean"
-			EditorType="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="ShowDropIndicator"
+			Name="Tooltip"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="HasHorizontalScrollbar"
 			Visible=true
 			Group="Appearance"
 			InitialValue="False"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="AutoDeactivate"
+			Name="HasVerticalScrollbar"
 			Visible=true
 			Group="Appearance"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="AutoHideScrollbars"
+			Name="DropIndicatorVisible"
 			Visible=true
-			Group="Behavior"
-			InitialValue="True"
+			Group="Appearance"
+			InitialValue="False"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="Bold"
-			Visible=true
-			Group="Font"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Border"
+			Name="AllowFocusRing"
 			Visible=true
 			Group="Appearance"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="ColumnCount"
-			Visible=true
-			Group="Appearance"
-			InitialValue="1"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ColumnsResizable"
-			Visible=true
-			Group="Behavior"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ColumnWidths"
-			Visible=true
-			Group="Appearance"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DataField"
-			Visible=true
-			Group="Database Binding"
-			Type="String"
-			EditorType="DataField"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DataSource"
-			Visible=true
-			Group="Database Binding"
-			Type="String"
-			EditorType="DataSource"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DefaultRowHeight"
-			Visible=true
-			Group="Appearance"
-			InitialValue="-1"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Enabled"
-			Visible=true
-			Group="Appearance"
-			InitialValue="True"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="EnableDrag"
-			Visible=true
-			Group="Behavior"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="EnableDragReorder"
-			Visible=true
-			Group="Behavior"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="GridLinesHorizontal"
-			Visible=true
-			Group="Appearance"
-			InitialValue="0"
-			Type="Integer"
-			EditorType="Enum"
-			#tag EnumValues
-				"0 - Default"
-				"1 - None"
-				"2 - ThinDotted"
-				"3 - ThinSolid"
-				"4 - ThickSolid"
-				"5 - DoubleThinSolid"
-			#tag EndEnumValues
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="GridLinesVertical"
-			Visible=true
-			Group="Appearance"
-			InitialValue="0"
-			Type="Integer"
-			EditorType="Enum"
-			#tag EnumValues
-				"0 - Default"
-				"1 - None"
-				"2 - ThinDotted"
-				"3 - ThinSolid"
-				"4 - ThickSolid"
-				"5 - DoubleThinSolid"
-			#tag EndEnumValues
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="HasHeading"
-			Visible=true
-			Group="Appearance"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="HeadingIndex"
-			Visible=true
-			Group="Appearance"
-			InitialValue="-1"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Height"
-			Visible=true
-			Group="Position"
-			InitialValue="100"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="HelpTag"
-			Visible=true
-			Group="Appearance"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Hierarchical"
-			Visible=true
-			Group="Behavior"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Index"
-			Visible=true
-			Group="ID"
-			Type="Integer"
-			EditorType="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="InitialParent"
-			Type="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="InitialValue"
-			Visible=true
-			Group="Appearance"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Italic"
-			Visible=true
-			Group="Font"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Left"
-			Visible=true
-			Group="Position"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="LockBottom"
-			Visible=true
-			Group="Position"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="LockLeft"
-			Visible=true
-			Group="Position"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="LockRight"
-			Visible=true
-			Group="Position"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="LockTop"
-			Visible=true
-			Group="Position"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Name"
-			Visible=true
-			Group="ID"
-			Type="String"
-			EditorType="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="RequiresSelection"
-			Visible=true
-			Group="Behavior"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ScrollbarHorizontal"
-			Visible=true
-			Group="Appearance"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ScrollBarVertical"
-			Visible=true
-			Group="Appearance"
-			InitialValue="True"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="SelectionType"
-			Visible=true
-			Group="Behavior"
-			InitialValue="0"
-			Type="Integer"
-			EditorType="Enum"
-			#tag EnumValues
-				"0 - Single"
-				"1 - Multiple"
-			#tag EndEnumValues
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Super"
-			Visible=true
-			Group="ID"
-			Type="String"
-			EditorType="String"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="TabIndex"
-			Visible=true
-			Group="Position"
-			InitialValue="0"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="TabPanelIndex"
-			Group="Position"
-			InitialValue="0"
-			Type="Integer"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="TabStop"
-			Visible=true
-			Group="Position"
-			InitialValue="True"
-			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="TextFont"
+			Name="FontName"
 			Visible=true
 			Group="Font"
 			InitialValue="System"
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="TextSize"
+			Name="FontSize"
 			Visible=true
 			Group="Font"
 			InitialValue="0"
 			Type="Single"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="TextUnit"
+			Name="FontUnit"
 			Visible=true
 			Group="Font"
 			InitialValue="0"
@@ -1394,23 +1176,248 @@ Inherits ListBox
 			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="AllowAutoHideScrollbars"
+			Visible=true
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowResizableColumns"
+			Visible=true
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowRowDragging"
+			Visible=true
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowRowReordering"
+			Visible=true
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowExpandableRows"
+			Visible=true
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="RowSelectionType"
+			Visible=true
+			Group="Behavior"
+			InitialValue="0"
+			Type="RowSelectionTypes"
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Single"
+				"1 - Multiple"
+			#tag EndEnumValues
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Transparent"
+			Visible=true
+			Group="Appearance"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Bold"
+			Visible=true
+			Group="Font"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ColumnCount"
+			Visible=true
+			Group="Appearance"
+			InitialValue="1"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ColumnWidths"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DefaultRowHeight"
+			Visible=true
+			Group="Appearance"
+			InitialValue="-1"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Enabled"
+			Visible=true
+			Group="Appearance"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="HeadingIndex"
+			Visible=true
+			Group="Appearance"
+			InitialValue="-1"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Height"
+			Visible=true
+			Group="Position"
+			InitialValue="100"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Index"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="InitialValue"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Italic"
+			Visible=true
+			Group="Font"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Left"
+			Visible=true
+			Group="Position"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LockBottom"
+			Visible=true
+			Group="Position"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LockLeft"
+			Visible=true
+			Group="Position"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LockRight"
+			Visible=true
+			Group="Position"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LockTop"
+			Visible=true
+			Group="Position"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Name"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="RequiresSelection"
+			Visible=true
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Super"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TabIndex"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TabPanelIndex"
+			Visible=false
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TabStop"
+			Visible=true
+			Group="Position"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Top"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Underline"
 			Visible=true
 			Group="Font"
+			InitialValue=""
 			Type="Boolean"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="UseFocusRing"
-			Visible=true
-			Group="Appearance"
-			InitialValue="True"
-			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Visible"
@@ -1418,6 +1425,7 @@ Inherits ListBox
 			Group="Appearance"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Width"
@@ -1425,6 +1433,7 @@ Inherits ListBox
 			Group="Position"
 			InitialValue="100"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="_ScrollOffset"
@@ -1432,6 +1441,7 @@ Inherits ListBox
 			Group="Appearance"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="_ScrollWidth"
@@ -1439,6 +1449,7 @@ Inherits ListBox
 			Group="Appearance"
 			InitialValue="-1"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

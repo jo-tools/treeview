@@ -1,52 +1,53 @@
-#tag Window
-Begin Window Window1
-   BackColor       =   &cFFFFFF00
+#tag DesktopWindow
+Begin DesktopWindow Window1
    Backdrop        =   0
-   CloseButton     =   True
-   Compatibility   =   ""
+   BackgroundColor =   &cFFFFFF00
    Composite       =   False
-   Frame           =   0
+   DefaultLocation =   0
    FullScreen      =   False
-   FullScreenButton=   False
-   HasBackColor    =   False
+   HasBackgroundColor=   False
+   HasCloseButton  =   True
+   HasFullScreenButton=   False
+   HasMaximizeButton=   True
+   HasMinimizeButton=   True
    Height          =   500
    ImplicitInstance=   True
-   LiveResize      =   True
    MacProcID       =   0
-   MaxHeight       =   32000
-   MaximizeButton  =   True
-   MaxWidth        =   32000
+   MaximumHeight   =   32000
+   MaximumWidth    =   32000
    MenuBar         =   57315327
    MenuBarVisible  =   True
-   MinHeight       =   400
-   MinimizeButton  =   True
-   MinWidth        =   450
-   Placement       =   0
+   MinimumHeight   =   400
+   MinimumWidth    =   450
    Resizeable      =   True
    Title           =   "TreeView"
+   Type            =   0
    Visible         =   True
    Width           =   600
    Begin lstTreeView lstTree
-      AutoDeactivate  =   True
-      AutoHideScrollbars=   True
+      AllowAutoDeactivate=   True
+      AllowAutoHideScrollbars=   True
+      AllowExpandableRows=   False
+      AllowFocusRing  =   True
+      AllowResizableColumns=   False
+      AllowRowDragging=   False
+      AllowRowReordering=   False
       Bold            =   False
-      Border          =   True
       ColumnCount     =   1
-      ColumnsResizable=   False
       ColumnWidths    =   ""
-      DataField       =   ""
-      DataSource      =   ""
       DefaultRowHeight=   -1
+      DropIndicatorVisible=   False
       Enabled         =   True
-      EnableDrag      =   False
-      EnableDragReorder=   False
-      GridLinesHorizontal=   0
-      GridLinesVertical=   0
-      HasHeading      =   False
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      GridLineStyle   =   0
+      HasBorder       =   True
+      HasHeader       =   False
+      HasHorizontalScrollbar=   False
+      HasVerticalScrollbar=   True
       HeadingIndex    =   -1
       Height          =   245
-      HelpTag         =   ""
-      Hierarchical    =   False
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
@@ -58,34 +59,28 @@ Begin Window Window1
       LockRight       =   True
       LockTop         =   True
       RequiresSelection=   False
+      RowSelectionType=   0
       Scope           =   2
-      ScrollbarHorizontal=   False
-      ScrollBarVertical=   True
-      SelectionType   =   0
-      ShowDropIndicator=   False
       TabIndex        =   7
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   115
       Transparent     =   True
       Underline       =   False
-      UseFocusRing    =   True
       Visible         =   True
       Width           =   560
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
-   Begin Label labSelectionCurrentTitle
-      AutoDeactivate  =   True
+   Begin DesktopLabel labSelectionCurrentTitle
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -102,25 +97,23 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Current Selection:"
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   370
       Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   140
    End
-   Begin Label labSelectionCurrent
-      AutoDeactivate  =   True
+   Begin DesktopLabel labSelectionCurrent
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -137,24 +130,24 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "..."
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   370
       Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   408
    End
-   Begin RadioButton radShowHintColumn
-      AutoDeactivate  =   True
+   Begin DesktopRadioButton radShowHintColumn
+      AllowAutoDeactivate=   True
       Bold            =   False
       Caption         =   " Show Hint Column "
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -168,9 +161,7 @@ Begin Window Window1
       TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   445
       Transparent     =   True
       Underline       =   False
@@ -178,14 +169,14 @@ Begin Window Window1
       Visible         =   True
       Width           =   200
    End
-   Begin Label labInfo
-      AutoDeactivate  =   True
+   Begin DesktopLabel labInfo
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
-      Height          =   64
-      HelpTag         =   ""
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   84
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -202,22 +193,21 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Switch Status with:\n  - Contextual Menu\n  - Keys: b, g, o, r, y\n  - Change: Double-Click, <space>"
-      TextAlign       =   0
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "SmallSystem"
-      TextSize        =   0.0
-      TextUnit        =   0
-      Top             =   416
+      Tooltip         =   ""
+      Top             =   415
       Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   247
    End
-   Begin Separator sepBottom
-      AutoDeactivate  =   True
+   Begin DesktopSeparator sepBottom
+      Active          =   False
+      AllowAutoDeactivate=   True
+      AllowTabStop    =   True
       Enabled         =   True
       Height          =   4
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -226,22 +216,29 @@ Begin Window Window1
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   False
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   10
       TabPanelIndex   =   0
-      TabStop         =   True
+      Tooltip         =   ""
       Top             =   400
       Transparent     =   True
       Visible         =   True
       Width           =   600
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
    End
-   Begin RadioButton radShowCaptionColumn
-      AutoDeactivate  =   True
+   Begin DesktopRadioButton radShowCaptionColumn
+      AllowAutoDeactivate=   True
       Bold            =   False
       Caption         =   " Caption Column only "
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   20
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -255,9 +252,7 @@ Begin Window Window1
       TabIndex        =   12
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   415
       Transparent     =   True
       Underline       =   False
@@ -265,16 +260,14 @@ Begin Window Window1
       Visible         =   True
       Width           =   200
    End
-   Begin Canvas cnvAppIcon
-      AcceptFocus     =   False
-      AcceptTabs      =   False
-      AutoDeactivate  =   True
+   Begin DesktopCanvas cnvAppIcon
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   True
+      AllowTabs       =   False
       Backdrop        =   0
-      DoubleBuffer    =   False
       Enabled         =   True
-      EraseBackground =   True
       Height          =   64
-      HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   20
@@ -287,22 +280,20 @@ Begin Window Window1
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
-      UseFocusRing    =   True
       Visible         =   True
       Width           =   64
    End
-   Begin Canvas cnvPayPal
-      AcceptFocus     =   False
-      AcceptTabs      =   False
-      AutoDeactivate  =   True
+   Begin DesktopCanvas cnvPayPal
+      AllowAutoDeactivate=   True
+      AllowFocus      =   False
+      AllowFocusRing  =   True
+      AllowTabs       =   False
       Backdrop        =   0
-      DoubleBuffer    =   False
       Enabled         =   True
-      EraseBackground =   True
       Height          =   30
-      HelpTag         =   "https://paypal.me/jotools"
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   474
@@ -315,20 +306,20 @@ Begin Window Window1
       TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
-      UseFocusRing    =   True
       Visible         =   True
       Width           =   106
    End
-   Begin Label labAppName
-      AutoDeactivate  =   True
+   Begin DesktopLabel labAppName
+      AllowAutoDeactivate=   True
       Bold            =   True
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
-      HelpTag         =   "#constWebsiteUrl"
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -345,25 +336,23 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppName"
-      TextAlign       =   1
+      TextAlignment   =   0
       TextColor       =   &c0072D800
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
       Underline       =   True
       Visible         =   True
       Width           =   120
    End
-   Begin Label labAppVersion
-      AutoDeactivate  =   True
+   Begin DesktopLabel labAppVersion
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -380,25 +369,23 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "AppVersion"
-      TextAlign       =   1
+      TextAlignment   =   0
       TextColor       =   &c00000000
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   120
    End
-   Begin Label labContact
-      AutoDeactivate  =   True
+   Begin DesktopLabel labContact
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
-      HelpTag         =   "xojo@jo-tools.ch"
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -415,25 +402,23 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Contact"
-      TextAlign       =   1
+      TextAlignment   =   0
       TextColor       =   &c0072CE00
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   54
       Transparent     =   True
       Underline       =   True
       Visible         =   True
       Width           =   70
    End
-   Begin Label labThanks
-      AutoDeactivate  =   True
+   Begin DesktopLabel labThanks
+      AllowAutoDeactivate=   True
       Bold            =   False
-      DataField       =   ""
-      DataSource      =   ""
       Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
       Height          =   30
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -450,22 +435,21 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Would you like to say 'Thank you'?"
-      TextAlign       =   2
+      TextAlignment   =   0
       TextColor       =   &c66666600
-      TextFont        =   "SmallSystem"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   20
       Transparent     =   True
       Underline       =   False
       Visible         =   True
       Width           =   209
    End
-   Begin Separator sepTop
-      AutoDeactivate  =   True
+   Begin DesktopSeparator sepTop
+      Active          =   False
+      AllowAutoDeactivate=   True
+      AllowTabStop    =   True
       Enabled         =   True
       Height          =   3
-      HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   0
@@ -474,22 +458,33 @@ Begin Window Window1
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
+      PanelIndex      =   0
       Scope           =   2
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
+      Tooltip         =   ""
       Top             =   100
       Transparent     =   True
       Visible         =   True
       Width           =   600
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
    End
 End
-#tag EndWindow
+#tag EndDesktopWindow
 
 #tag WindowCode
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  Self.Title = constAppName
+		  
+		  #If TargetMacOS Then
+		    Var rect As Xojo.Rect = Self.Bounds
+		    rect.Top = DesktopDisplay.DisplayAt(0).AvailableTop
+		    Self.Bounds = rect
+		  #EndIf
 		  
 		  Self.Tree_Setup
 		End Sub
@@ -498,7 +493,7 @@ End
 
 	#tag Method, Flags = &h21
 		Private Function ColorValue(piIconColor As IconColor) As Color
-		  Dim oColor As Color = &c000000
+		  Var oColor As Color = &c000000
 		  
 		  Select Case piIconColor
 		  Case IconColor.Blue
@@ -519,23 +514,23 @@ End
 
 	#tag Method, Flags = &h21
 		Private Function Icon(piIconColor As IconColor) As Picture
-		  Dim pa() As Picture
+		  Var pa() As Picture
 		  
-		  Dim oColor As Color = Me.ColorValue(piIconColor)
+		  Var oColor As Color = Me.ColorValue(piIconColor)
 		  
-		  Dim oIcon As New Picture(12, 12)
-		  oIcon.Graphics.ForeColor = oColor
+		  Var oIcon As New Picture(12, 12)
+		  oIcon.Graphics.DrawingColor = oColor
 		  oIcon.Graphics.FillOval(0, 0, 12, 12)
-		  oIcon.Graphics.ForeColor = &c000000
+		  oIcon.Graphics.DrawingColor = &c000000
 		  oIcon.Graphics.DrawOval(0, 0, 12, 12)
-		  pa.Append(oIcon)
+		  pa.Add(oIcon)
 		  
 		  oIcon = New Picture(24, 24)
-		  oIcon.Graphics.ForeColor = oColor
+		  oIcon.Graphics.DrawingColor = oColor
 		  oIcon.Graphics.FillOval(0, 0, 24, 24)
-		  oIcon.Graphics.ForeColor = &c000000
+		  oIcon.Graphics.DrawingColor = &c000000
 		  oIcon.Graphics.DrawOval(0, 0, 24, 24)
-		  pa.Append(oIcon)
+		  pa.Add(oIcon)
 		  
 		  Return New Picture(12, 12, pa)
 		End Function
@@ -568,45 +563,45 @@ End
 	#tag Method, Flags = &h21
 		Private Sub Tree_Setup()
 		  'Helper Variables to make example more readable
-		  Dim bIsExpanded As Boolean = True
-		  Dim bIsNotExpanded As Boolean = False
+		  Var bIsExpanded As Boolean = True
+		  Var bIsNotExpanded As Boolean = False
 		  
 		  'Build a hierarchical list (CTreeListedValues)
 		  '(we do it backwards here - you can of course do this in a recursive manner)
 		  
-		  Dim oSubTree13 As New CTreeListedValues
-		  oSubTree13.Append("Name 1.3.1", "Hint 1.3.1", "Key 1.3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.3.1")
-		  oSubTree13.Append("Name 1.3.2", "Hint 1.3.2", "Key 1.3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.3.2")
+		  Var oSubTree13 As New CTreeListedValues
+		  oSubTree13.Add("Name 1.3.1", "Hint 1.3.1", "Key 1.3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.3.1")
+		  oSubTree13.Add("Name 1.3.2", "Hint 1.3.2", "Key 1.3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.3.2")
 		  
-		  Dim oSubTree12 As New CTreeListedValues
-		  oSubTree12.Append("Name 1.2.1", "Hint 1.2.1", "Key 1.2.1", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 1.2.1")
-		  oSubTree12.Append("Name 1.2.2", "Hint 1.2.2", "Key 1.2.2", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.2.2")
+		  Var oSubTree12 As New CTreeListedValues
+		  oSubTree12.Add("Name 1.2.1", "Hint 1.2.1", "Key 1.2.1", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 1.2.1")
+		  oSubTree12.Add("Name 1.2.2", "Hint 1.2.2", "Key 1.2.2", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 1.2.2")
 		  
-		  Dim oSubTree11 As New CTreeListedValues
-		  oSubTree11.Append("Name 1.1.1", "Hint 1.1.1", "Key 1.1.1", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.1.1")
-		  oSubTree11.Append("Name 1.1.2", "Hint 1.1.2", "Key 1.1.2", Me.StatusValue(IconColor.Orange), bIsNotExpanded, Nil, "Data 1.1.2")
+		  Var oSubTree11 As New CTreeListedValues
+		  oSubTree11.Add("Name 1.1.1", "Hint 1.1.1", "Key 1.1.1", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 1.1.1")
+		  oSubTree11.Add("Name 1.1.2", "Hint 1.1.2", "Key 1.1.2", Me.StatusValue(IconColor.Orange), bIsNotExpanded, Nil, "Data 1.1.2")
 		  
 		  
-		  Dim oSubTree1 As New CTreeListedValues
-		  oSubTree1.Append("Name 1.1", "Hint 1.1", "Key 1.1", Self.constNoStatus, bIsExpanded, oSubTree11, "Data 1.1")
-		  oSubTree1.Append("Name 1.2", "Hint 1.2", "Key 1.2", Self.constNoStatus, bIsNotExpanded, oSubTree12, "Data 1.2")
-		  oSubTree1.Append("Name 1.3", "Hint 1.3", "Key 1.3", Self.constNoStatus, bIsNotExpanded, oSubTree13, "Data 1.3")
+		  Var oSubTree1 As New CTreeListedValues
+		  oSubTree1.Add("Name 1.1", "Hint 1.1", "Key 1.1", Self.constNoStatus, bIsExpanded, oSubTree11, "Data 1.1")
+		  oSubTree1.Add("Name 1.2", "Hint 1.2", "Key 1.2", Self.constNoStatus, bIsNotExpanded, oSubTree12, "Data 1.2")
+		  oSubTree1.Add("Name 1.3", "Hint 1.3", "Key 1.3", Self.constNoStatus, bIsNotExpanded, oSubTree13, "Data 1.3")
 		  
-		  Dim oSubTree3 As New CTreeListedValues
-		  oSubTree3.Append("Name 3.1", "Hint 3.1", "Key 3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 3.1")
-		  oSubTree3.Append("Name 3.2", "Hint 3.2", "Key 3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 3.2")
-		  oSubTree3.Append("Name 3.3", "Hint 3.3", "Key 3.3", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 3.3")
+		  Var oSubTree3 As New CTreeListedValues
+		  oSubTree3.Add("Name 3.1", "Hint 3.1", "Key 3.1", Me.StatusValue(IconColor.Green), bIsNotExpanded, Nil, "Data 3.1")
+		  oSubTree3.Add("Name 3.2", "Hint 3.2", "Key 3.2", Me.StatusValue(IconColor.Blue), bIsNotExpanded, Nil, "Data 3.2")
+		  oSubTree3.Add("Name 3.3", "Hint 3.3", "Key 3.3", Me.StatusValue(IconColor.Red), bIsNotExpanded, Nil, "Data 3.3")
 		  
 		  'This is our final example hierarchical list, which will be represented in the TreeView
 		  '(Item 1 and 3 have a sub-tree, 2 doesn't)
 		  eoTree = New CTreeListedValues
-		  eoTree.Append("Name 1", "Hint 1", "Key 1", Self.constNoStatus, bIsExpanded, oSubTree1, "Data 1")
-		  eoTree.Append("Name 2", "Hint 2", "Key 2", Self.constNoStatus, bIsNotExpanded, Nil, "Data 2")
-		  eoTree.Append("Name 3", "Hint 3", "Key 3", Self.constNoStatus, bIsExpanded, oSubTree3, "Data 3")
+		  eoTree.Add("Name 1", "Hint 1", "Key 1", Self.constNoStatus, bIsExpanded, oSubTree1, "Data 1")
+		  eoTree.Add("Name 2", "Hint 2", "Key 2", Self.constNoStatus, bIsNotExpanded, Nil, "Data 2")
+		  eoTree.Add("Name 3", "Hint 3", "Key 3", Self.constNoStatus, bIsExpanded, oSubTree3, "Data 3")
 		  
 		  
 		  'Setup Icons and Colors for the TreeView
-		  Dim dictIcons As New Dictionary
+		  Var dictIcons As New Dictionary
 		  dictIcons.Value(1) = Me.Icon(IconColor.Blue)
 		  dictIcons.Value(2) = Me.Icon(IconColor.Green)
 		  dictIcons.Value(3) = Me.Icon(IconColor.Orange)
@@ -614,7 +609,7 @@ End
 		  dictIcons.Value(5) = Me.Icon(IconColor.Yellow)
 		  lstTree.Data_StatusIcons(dictIcons)
 		  
-		  Dim dictColors As New Dictionary
+		  Var dictColors As New Dictionary
 		  dictColors.Value(1) = Me.ColorValue(IconColor.Blue)
 		  dictColors.Value(2) = Me.ColorValue(IconColor.Green)
 		  dictColors.Value(3) = Me.ColorValue(IconColor.Orange)
@@ -700,7 +695,7 @@ End
 		  End If
 		  
 		  'Space (not handled above) or Double-Click: Switch Status
-		  Dim iStatus As Integer = poTreeList.Status(piPos)
+		  Var iStatus As Integer = poTreeList.Status(piPos)
 		  Select Case iStatus
 		  Case 1
 		    iStatus = 2
@@ -719,7 +714,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function OnRequestStatusChangeMenu(poTreeList As CTreeListedValues, piPos As Integer, piStatus As Integer = -1, pvData As Variant) As MenuItem
+		Function OnRequestStatusChangeMenu(poTreeList As CTreeListedValues, piPos As Integer, piStatus As Integer = -1, pvData As Variant) As DesktopMenuItem
 		  #Pragma unused piStatus
 		  #Pragma unused pvData
 		  
@@ -728,37 +723,37 @@ End
 		    Return Nil
 		  End If
 		  
-		  Dim oMenu As New MenuItem
+		  Var oMenu As New DesktopMenuItem
 		  
-		  Dim oMenuItemBlue As New MenuItem
+		  Var oMenuItemBlue As New DesktopMenuItem
 		  oMenuItemBlue.Text = "Blue"
 		  oMenuItemBlue.Name = "mnuBlue"
-		  oMenuItemBlue.Checked = (poTreeList.Status(piPos) = 1)
-		  oMenu.Append(oMenuItemBlue)
+		  oMenuItemBlue.HasCheckMark = (poTreeList.Status(piPos) = 1)
+		  oMenu.AddMenu(oMenuItemBlue)
 		  
-		  Dim oMenuItemGreen As New MenuItem
+		  Var oMenuItemGreen As New DesktopMenuItem
 		  oMenuItemGreen.Text = "Green"
 		  oMenuItemGreen.Name = "mnuGreen"
-		  oMenuItemGreen.Checked = (poTreeList.Status(piPos) = 2)
-		  oMenu.Append(oMenuItemGreen)
+		  oMenuItemGreen.HasCheckMark = (poTreeList.Status(piPos) = 2)
+		  oMenu.AddMenu(oMenuItemGreen)
 		  
-		  Dim oMenuItemOrange As New MenuItem
+		  Var oMenuItemOrange As New DesktopMenuItem
 		  oMenuItemOrange.Text = "Orange"
 		  oMenuItemOrange.Name = "mnuOrange"
-		  oMenuItemOrange.Checked = (poTreeList.Status(piPos) = 3)
-		  oMenu.Append(oMenuItemOrange)
+		  oMenuItemOrange.HasCheckMark = (poTreeList.Status(piPos) = 3)
+		  oMenu.AddMenu(oMenuItemOrange)
 		  
-		  Dim oMenuItemRed As New MenuItem
+		  Var oMenuItemRed As New DesktopMenuItem
 		  oMenuItemRed.Text = "Red"
 		  oMenuItemRed.Name = "mnuRed"
-		  oMenuItemRed.Checked = (poTreeList.Status(piPos) = 4)
-		  oMenu.Append(oMenuItemRed)
+		  oMenuItemRed.HasCheckMark = (poTreeList.Status(piPos) = 4)
+		  oMenu.AddMenu(oMenuItemRed)
 		  
-		  Dim oMenuItemYellow As New MenuItem
+		  Var oMenuItemYellow As New DesktopMenuItem
 		  oMenuItemYellow.Text = "Yellow"
 		  oMenuItemYellow.Name = "mnuYellow"
-		  oMenuItemYellow.Checked = (poTreeList.Status(piPos) = 5)
-		  oMenu.Append(oMenuItemYellow)
+		  oMenuItemYellow.HasCheckMark = (poTreeList.Status(piPos) = 5)
+		  oMenu.AddMenu(oMenuItemYellow)
 		  
 		  Return oMenu
 		End Function
@@ -793,8 +788,8 @@ End
 #tag EndEvents
 #tag Events radShowHintColumn
 	#tag Event
-		Sub Action()
-		  Dim sSelectedKey As String = lstTree.Sel_Key
+		Sub ValueChanged()
+		  Var sSelectedKey As String = lstTree.Sel_Key
 		  Self.Tree_Init(sSelectedKey)
 		  
 		End Sub
@@ -802,29 +797,29 @@ End
 #tag EndEvents
 #tag Events radShowCaptionColumn
 	#tag Event
-		Sub Action()
-		  Dim sSelectedKey As String = lstTree.Sel_Key
+		Sub ValueChanged()
+		  Var sSelectedKey As String = lstTree.Sel_Key
 		  Self.Tree_Init(sSelectedKey)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events cnvAppIcon
 	#tag Event
-		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		Sub Paint(g As Graphics, areas() As Rect)
 		  #Pragma unused areas
 		  
 		  g.DrawPicture(AppIcon_64, 0, 0)
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub MouseUp(X As Integer, Y As Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL(constWebsiteUrl)
+		    System.GotoURL(constWebsiteUrl)
 		  End If
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #Pragma unused X
 		  #Pragma unused Y
 		  
@@ -845,16 +840,14 @@ End
 #tag EndEvents
 #tag Events cnvPayPal
 	#tag Event
-		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		Sub Paint(g As Graphics, areas() As Rect)
 		  #Pragma unused areas
 		  
-		  g.ForeColor = &cFFFFFF
-		  #If (XojoVersion >= 2018.03) Then
-		    If IsDarkMode Then g.ForeColor = &cD0D0D0
-		  #EndIf
-		  g.FillRect(0, 0, g.Width, g.Height)
-		  g.ForeColor = &c909090
-		  g.DrawRect(0, 0, g.Width, g.Height)
+		  g.DrawingColor = &cFFFFFF
+		  If Color.IsDarkMode Then g.DrawingColor = &cD0D0D0
+		  g.FillRectangle(0, 0, g.Width, g.Height)
+		  g.DrawingColor = &c909090
+		  g.DrawRectangle(0, 0, g.Width, g.Height)
 		  g.DrawPicture(PayPal, 3, 2, 100, 26, 0, 0, PayPal.Width, PayPal.Height)
 		End Sub
 	#tag EndEvent
@@ -870,14 +863,14 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub MouseUp(X As Integer, Y As Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL("https://paypal.me/jotools")
+		    System.GotoURL("https://paypal.me/jotools")
 		  End If
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #Pragma unused X
 		  #Pragma unused Y
 		  
@@ -887,21 +880,21 @@ End
 #tag EndEvents
 #tag Events labAppName
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  Me.Text = constAppName
-		  Me.TextSize = 18
+		  Me.FontSize = 18
 		  Me.Bold = True
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub MouseUp(X As Integer, Y As Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL(constWebsiteUrl)
+		    System.GotoURL(constWebsiteUrl)
 		  End If
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #Pragma unused X
 		  #Pragma unused Y
 		  
@@ -922,9 +915,9 @@ End
 #tag EndEvents
 #tag Events labAppVersion
 	#tag Event
-		Sub Open()
-		  If (App.ShortVersion <> "") Then
-		    Me.Text = App.ShortVersion
+		Sub Opening()
+		  If (App.Version <> "") Then
+		    Me.Text = App.Version
 		    Return
 		  End If
 		  
@@ -945,7 +938,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #Pragma unused X
 		  #Pragma unused Y
 		  
@@ -953,83 +946,52 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
-		Sub MouseUp(X As Integer, Y As Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    ShowURL("mailto:xojo@jo-tools.ch")
+		    System.GotoURL("mailto:xojo@jo-tools.ch")
 		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="Name"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Interfaces"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Super"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Width"
-		Visible=true
-		Group="Size"
-		InitialValue="600"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Size"
-		InitialValue="400"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinWidth"
+		Name="MinimumWidth"
 		Visible=true
 		Group="Size"
 		InitialValue="64"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MinHeight"
+		Name="MinimumHeight"
 		Visible=true
 		Group="Size"
 		InitialValue="64"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MaxWidth"
+		Name="MaximumWidth"
 		Visible=true
 		Group="Size"
 		InitialValue="32000"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MaxHeight"
+		Name="MaximumHeight"
 		Visible=true
 		Group="Size"
 		InitialValue="32000"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Frame"
+		Name="Type"
 		Visible=true
 		Group="Frame"
 		InitialValue="0"
-		Type="Integer"
+		Type="Types"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Document"
@@ -1041,83 +1003,47 @@ End
 			"6 - Rounded Window"
 			"7 - Global Floating Window"
 			"8 - Sheet Window"
-			"9 - Metal Window"
-			"11 - Modeless Dialog"
+			"9 - Modeless Dialog"
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Title"
-		Visible=true
-		Group="Frame"
-		InitialValue="Untitled"
-		Type="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="CloseButton"
+		Name="HasCloseButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Resizeable"
+		Name="HasMaximizeButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MaximizeButton"
+		Name="HasMinimizeButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MinimizeButton"
-		Visible=true
-		Group="Frame"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="FullScreenButton"
+		Name="HasFullScreenButton"
 		Visible=true
 		Group="Frame"
 		InitialValue="False"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Composite"
-		Group="OS X (Carbon)"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MacProcID"
-		Group="OS X (Carbon)"
-		InitialValue="0"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ImplicitInstance"
-		Visible=true
-		Group="Behavior"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Placement"
+		Name="DefaultLocation"
 		Visible=true
 		Group="Behavior"
 		InitialValue="0"
-		Type="Integer"
+		Type="Locations"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Default"
@@ -1128,54 +1054,132 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="&hFFFFFF"
+		Type="ColorGroup"
+		EditorType="ColorGroup"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Interfaces"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Super"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Width"
+		Visible=true
+		Group="Size"
+		InitialValue="600"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Size"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Title"
+		Visible=true
+		Group="Frame"
+		InitialValue="Untitled"
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Resizeable"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Composite"
+		Visible=false
+		Group="OS X (Carbon)"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MacProcID"
+		Visible=false
+		Group="OS X (Carbon)"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Visible"
 		Visible=true
 		Group="Behavior"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="LiveResize"
-		Group="Behavior"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="FullScreen"
+		Visible=false
 		Group="Behavior"
 		InitialValue="False"
 		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
-		Visible=true
-		Group="Background"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="BackColor"
-		Visible=true
-		Group="Background"
-		InitialValue="&hFFFFFF"
-		Type="Color"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Backdrop"
 		Visible=true
 		Group="Background"
+		InitialValue=""
 		Type="Picture"
-		EditorType="Picture"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MenuBar"
 		Visible=true
 		Group="Menus"
-		Type="MenuBar"
-		EditorType="MenuBar"
+		InitialValue=""
+		Type="DesktopMenuBar"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="MenuBarVisible"
@@ -1183,6 +1187,6 @@ End
 		Group="Deprecated"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior
