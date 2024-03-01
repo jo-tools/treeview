@@ -35,8 +35,8 @@ TreeView: Example app - Windows
 [Xojo](https://www.xojo.com/) is a rapid application development for Desktop, Web, Mobile & Raspberry Pi.  
 
 The Desktop application Xojo example project ```TreeView.xojo_project``` is using:
-- Xojo 2018r4
-- API 1
+- Xojo 2023r4
+- API 2
 
 ### How to use in your own Xojo project?
 1. Copy and paste the folder ```treeview``` *(containing the classes ```CTreeListedValues``` and ```CTreeItem```, as well as the Listbox Subclass ```lstTreeView```)* to your project.
