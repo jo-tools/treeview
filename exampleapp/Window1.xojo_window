@@ -176,7 +176,7 @@ Begin DesktopWindow Window1
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      Height          =   64
+      Height          =   84
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
@@ -196,7 +196,7 @@ Begin DesktopWindow Window1
       TextAlignment   =   0
       TextColor       =   &c00000000
       Tooltip         =   ""
-      Top             =   416
+      Top             =   415
       Transparent     =   True
       Underline       =   False
       Visible         =   True
