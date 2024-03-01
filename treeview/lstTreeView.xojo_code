@@ -607,7 +607,7 @@ Inherits DesktopListBox
 		      'At least on Windows, Xojo doesn't draw the whole row with a background selection
 		      'so we do that here ourselves. Should be improved with Declares to get the correct
 		      'colors for the state 'window is not active'...
-		      g.DrawingColor = If(Self.Active, HighlightColor, If(IsDarkMode, &c242424, &cC9C5BB))
+		      g.DrawingColor = If(Self.Active, Color.HighlightColor, If(Color.IsDarkMode, &c242424, &cC9C5BB))
 		      g.FillRectangle(0, 0, g.width, g.height)
 		      Return True
 		    #EndIf
