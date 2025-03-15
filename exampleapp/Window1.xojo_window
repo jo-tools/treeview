@@ -3,7 +3,7 @@ Begin DesktopWindow Window1
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF00
    Composite       =   False
-   DefaultLocation =   0
+   DefaultLocation =   2
    FullScreen      =   False
    HasBackgroundColor=   False
    HasCloseButton  =   True
@@ -280,7 +280,7 @@ Begin DesktopWindow Window1
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
-      Tooltip         =   ""
+      Tooltip         =   "#constUrlRepository"
       Top             =   20
       Transparent     =   True
       Visible         =   True
@@ -306,7 +306,7 @@ Begin DesktopWindow Window1
       TabIndex        =   5
       TabPanelIndex   =   0
       TabStop         =   True
-      Tooltip         =   ""
+      Tooltip         =   "#constUrlPayPal"
       Top             =   54
       Transparent     =   True
       Visible         =   True
@@ -338,7 +338,7 @@ Begin DesktopWindow Window1
       Text            =   "AppName"
       TextAlignment   =   0
       TextColor       =   &c0072D800
-      Tooltip         =   ""
+      Tooltip         =   "#constUrlRepository"
       Top             =   20
       Transparent     =   True
       Underline       =   True
@@ -404,7 +404,7 @@ Begin DesktopWindow Window1
       Text            =   "Contact"
       TextAlignment   =   0
       TextColor       =   &c0072CE00
-      Tooltip         =   ""
+      Tooltip         =   "#constEmailContact"
       Top             =   54
       Transparent     =   True
       Underline       =   True
@@ -422,7 +422,7 @@ Begin DesktopWindow Window1
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   371
+      Left            =   351
       LockBottom      =   False
       LockedInPosition=   True
       LockLeft        =   False
@@ -435,14 +435,14 @@ Begin DesktopWindow Window1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Would you like to say 'Thank you'?"
-      TextAlignment   =   0
+      TextAlignment   =   3
       TextColor       =   &c66666600
       Tooltip         =   ""
       Top             =   20
       Transparent     =   True
       Underline       =   False
       Visible         =   True
-      Width           =   209
+      Width           =   229
    End
    Begin DesktopSeparator sepTop
       Active          =   False
@@ -479,12 +479,6 @@ End
 	#tag Event
 		Sub Opening()
 		  Self.Title = constAppName
-		  
-		  #If TargetMacOS Then
-		    Var rect As Xojo.Rect = Self.Bounds
-		    rect.Top = DesktopDisplay.DisplayAt(0).AvailableTop
-		    Self.Bounds = rect
-		  #EndIf
 		  
 		  Self.Tree_Setup
 		End Sub
@@ -631,10 +625,16 @@ End
 	#tag Constant, Name = constAppName, Type = String, Dynamic = False, Default = \"Tree View", Scope = Private
 	#tag EndConstant
 
+	#tag Constant, Name = constEmailContact, Type = String, Dynamic = False, Default = \"xojo@jo-tools.ch", Scope = Private
+	#tag EndConstant
+
 	#tag Constant, Name = constNoStatus, Type = Double, Dynamic = False, Default = \"0", Scope = Private
 	#tag EndConstant
 
-	#tag Constant, Name = constWebsiteUrl, Type = String, Dynamic = False, Default = \"https://www.jo-tools.ch/xojo/treeview/", Scope = Private
+	#tag Constant, Name = constUrlPayPal, Type = String, Dynamic = False, Default = \"https://paypal.me/jotools", Scope = Private
+	#tag EndConstant
+
+	#tag Constant, Name = constUrlRepository, Type = String, Dynamic = False, Default = \"https://github.com/jo-tools/treeview", Scope = Private
 	#tag EndConstant
 
 
@@ -814,7 +814,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    System.GotoURL(constWebsiteUrl)
+		    System.GotoURL(constUrlRepository)
 		  End If
 		End Sub
 	#tag EndEvent
@@ -865,7 +865,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    System.GotoURL("https://paypal.me/jotools")
+		    System.GotoURL(constUrlPayPal)
 		  End If
 		End Sub
 	#tag EndEvent
@@ -889,7 +889,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    System.GotoURL(constWebsiteUrl)
+		    System.GotoURL(constUrlRepository)
 		  End If
 		End Sub
 	#tag EndEvent
@@ -948,7 +948,7 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  If (x >= 0) And (x < Me.Width) And (y > 0) And (y < Me.Height) Then
-		    System.GotoURL("mailto:xojo@jo-tools.ch")
+		    System.GotoURL("mailto:" + constEmailContact)
 		  End If
 		End Sub
 	#tag EndEvent
