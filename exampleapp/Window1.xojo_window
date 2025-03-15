@@ -480,12 +480,6 @@ End
 		Sub Opening()
 		  Self.Title = constAppName
 		  
-		  #If TargetMacOS Then
-		    Var rect As Xojo.Rect = Self.Bounds
-		    rect.Top = DesktopDisplay.DisplayAt(0).AvailableTop
-		    Self.Bounds = rect
-		  #EndIf
-		  
 		  Self.Tree_Setup
 		End Sub
 	#tag EndEvent
